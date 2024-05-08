@@ -13,7 +13,7 @@ class ProductItem1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.productDetailScreen),
+      onTap: () => Get.toNamed(Routes.productDetailsScreen),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: AppPadding.p16, horizontal: AppPadding.p12),
         decoration: BoxDecoration(

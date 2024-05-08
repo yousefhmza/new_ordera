@@ -15,7 +15,7 @@ class ProductItem5 extends StatelessWidget {
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.productDetailScreen),
+        onTap: () => Get.toNamed(Routes.productDetailsScreen),
         child: Container(
           width: 190.h,
           height: 250.v,

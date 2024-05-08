@@ -69,7 +69,7 @@ class OnBoardingScreen extends GetWidget<OnBoardingController> {
                           text: AppStrings.lblNext.tr,
                           onPressed: () {
                             controller.pageController.page == 2.0
-                                ? Get.toNamed(Routes.signInScreen)
+                                ? Get.toNamed(Routes.loginScreen)
                                 : controller.pageController.nextPage(duration: Time.t450ms, curve: Curves.easeInOut);
                           },
                         ),

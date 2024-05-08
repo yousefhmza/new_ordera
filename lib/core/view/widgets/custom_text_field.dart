@@ -1,122 +1,132 @@
-import 'package:ecommerce/core/resources/resources.dart';
+import '../views.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/services.dart';
 
-import '../../../config/theme/custom_text_style.dart';
+import '../../resources/resources.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  final Alignment? alignment;
-  final double? width;
-  final TextEditingController? controller;
-  final FocusNode? focusNode;
-  final bool? autofocus;
-  final TextStyle? textStyle;
-  final bool? obscureText;
-  final TextInputAction? textInputAction;
-  final TextInputType? textInputType;
-  final int? maxLines;
+class CustomTextField extends StatelessWidget {
+  final String? label;
+  final String? description;
+  final Color labelColor;
   final String? hintText;
-  final TextStyle? hintStyle;
   final Widget? prefix;
-  final BoxConstraints? prefixConstraints;
   final Widget? suffix;
-  final BoxConstraints? suffixConstraints;
-  final EdgeInsets? contentPadding;
-  final InputBorder? borderDecoration;
-  final Color? fillColor;
-  final bool? filled;
-  final FormFieldValidator<String>? validator;
+  final bool readOnly;
+  final bool obscureText;
+  final bool? enabled;
+  final bool? isDense;
+  final int? maxLines;
+  final int? minLines;
+  final int? maxLength;
+  final String? initialValue;
+  final TextInputType? keyBoardType;
+  final TextCapitalization? textCapitalization;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final void Function()? onTap;
+  final void Function(String?)? onSaved;
+  final void Function(String)? onSubmitted;
+  final TextEditingController? controller;
+  final List<TextInputFormatter>? formatters;
+  final AutovalidateMode? autoValidateMode;
+  final TextInputAction? textInputAction;
+  final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? prefixSuffixPadding;
 
-  const CustomTextFormField({
-    super.key,
-    this.alignment,
-    this.width,
-    this.controller,
-    this.focusNode,
-    this.autofocus = true,
-    this.textStyle,
-    this.obscureText = false,
-    this.textInputAction = TextInputAction.next,
-    this.textInputType = TextInputType.text,
-    this.maxLines,
+  const CustomTextField({
     this.hintText,
-    this.hintStyle,
+    this.label,
+    this.description,
+    this.labelColor = AppColors.black,
     this.prefix,
-    this.prefixConstraints,
     this.suffix,
-    this.suffixConstraints,
-    this.contentPadding,
-    this.borderDecoration,
-    this.fillColor,
-    this.filled = true,
+    this.textCapitalization,
     this.validator,
+    this.readOnly = false,
+    this.obscureText = false,
+    this.keyBoardType,
+    this.controller,
+    this.enabled,
+    this.isDense,
+    this.formatters,
+    this.onChanged,
+    this.onTap,
+    this.onSaved,
+    this.onSubmitted,
+    this.textInputAction,
+    this.maxLines,
+    this.minLines,
+    this.maxLength,
+    this.initialValue,
+    this.autoValidateMode,
+    this.contentPadding,
+    this.prefixSuffixPadding,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: textFormFieldWidget,
-          )
-        : textFormFieldWidget;
+    return TextFormField(
+      autovalidateMode: autoValidateMode,
+      cursorColor: AppColors.primary,
+      cursorHeight: AppSize.s16,
+      textCapitalization: textCapitalization ?? TextCapitalization.sentences,
+      obscureText: obscureText,
+      readOnly: readOnly,
+      validator: validator,
+      controller: controller,
+      inputFormatters: formatters,
+      onChanged: onChanged,
+      onTap: onTap,
+      onSaved: onSaved,
+      maxLength: maxLength,
+      onFieldSubmitted: onSubmitted,
+      initialValue: initialValue,
+      keyboardType: keyBoardType,
+      maxLines: maxLines ?? 1,
+      minLines: minLines ?? 1,
+      enabled: enabled,
+      textInputAction: textInputAction,
+      style: const TextStyle(
+        color: AppColors.black,
+        // fontFamily: L10n.isAr(context) ? FontConstants.arabicFontFamily : FontConstants.englishFontFamily,
+        fontFamily: FontConstants.englishFontFamily,
+        fontSize: FontSize.s14,
+        fontWeight: FontWeightManager.regular,
+      ),
+      decoration: InputDecoration(
+        hintText: hintText,
+        filled: true,
+        fillColor: AppColors.white,
+        contentPadding: contentPadding,
+        isDense: isDense,
+        prefixIcon: prefix != null
+            ? Padding(
+                padding:
+                    prefixSuffixPadding ?? const EdgeInsetsDirectional.only(start: AppPadding.p12, end: AppPadding.p4),
+                child: prefix,
+              )
+            : null,
+        prefixIconConstraints: const BoxConstraints(minWidth: AppSize.s0, minHeight: AppSize.s0),
+        suffixIcon: suffix != null
+            ? Padding(
+                padding: prefixSuffixPadding ?? const EdgeInsets.all(AppPadding.p12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      color: AppColors.textFieldBorder,
+                      height: AppSize.s28,
+                      width: AppSize.s1,
+                    ),
+                    const HorizontalSpace(AppSize.s6),
+                    suffix!,
+                  ],
+                ),
+              )
+            : null,
+        suffixIconConstraints: const BoxConstraints(minWidth: AppSize.s0, minHeight: AppSize.s0),
+      ),
+    );
   }
-
-  Widget get textFormFieldWidget => SizedBox(
-        width: width ?? double.maxFinite,
-        child: TextFormField(
-          controller: controller,
-          focusNode: focusNode ?? FocusNode(),
-          autofocus: autofocus!,
-          style: textStyle ?? CustomTextStyles.bodyMediumGray40001,
-          obscureText: obscureText!,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
-          decoration: decoration,
-          validator: validator,
-        ),
-      );
-
-  InputDecoration get decoration => InputDecoration(
-        hintText: hintText ?? "",
-        hintStyle: hintStyle ?? Get.theme.textTheme.bodyMedium,
-        prefixIcon: prefix,
-        prefixIconConstraints: prefixConstraints,
-        suffixIcon: suffix,
-        suffixIconConstraints: suffixConstraints,
-        isDense: true,
-        contentPadding: contentPadding ?? EdgeInsets.only(left: 14, top: 14, bottom: 14),
-        fillColor: fillColor ?? AppColors.white,
-        filled: filled,
-        border: borderDecoration ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: AppColors.gray40001, width: 1),
-            ),
-        enabledBorder: borderDecoration ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: AppColors.gray40001, width: 1),
-            ),
-        focusedBorder: borderDecoration ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Get.theme.colorScheme.primary, width: 1),
-            ),
-      );
-}
-
-extension TextFormFieldStyleHelper on CustomTextFormField {
-  static OutlineInputBorder get outlineGrayTL10 => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(color: AppColors.gray40001, width: 1),
-      );
-
-  static OutlineInputBorder get outlinePrimaryTL10 => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Get.theme.colorScheme.primary, width: 1),
-      );
-
-  static OutlineInputBorder get fillWhiteA => const OutlineInputBorder(borderSide: BorderSide.none);
 }

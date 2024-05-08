@@ -4,8 +4,9 @@ import 'package:ecommerce/modules/account/controller/account_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/add_new_address_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/addresses_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/choose_on_map_controller.dart';
-import 'package:ecommerce/modules/auth/controller/sign_in_controller.dart';
-import 'package:ecommerce/modules/auth/controller/sign_up_controller.dart';
+import 'package:ecommerce/modules/auth/controller/login_controller.dart';
+import 'package:ecommerce/modules/auth/controller/registration_controller.dart';
+import 'package:ecommerce/modules/auth/repositories/auth_repo.dart';
 import 'package:ecommerce/modules/cart/controller/shopping_cart_controller.dart';
 import 'package:ecommerce/modules/categories/controller/categories_controller.dart';
 import 'package:ecommerce/modules/following/controller/following_controller.dart';
@@ -17,6 +18,8 @@ import 'package:ecommerce/modules/payment/controller/add_card_controller.dart';
 import 'package:ecommerce/modules/payment/controller/add_payment_method_controller.dart';
 import 'package:ecommerce/modules/payment/controller/payment_methods_controller.dart';
 import 'package:ecommerce/modules/product/controller/product_detail_controller.dart';
+import 'package:ecommerce/modules/regions/controllers/regions_controller.dart';
+import 'package:ecommerce/modules/regions/repositories/regions_repo.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -34,8 +37,7 @@ Future<void> init() async {
   sl.registerLazySingleton<GetStorage>(() => GetStorage());
   sl.registerLazySingleton<Dio>(() => Dio());
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
-  sl.registerLazySingleton<PrettyDioLogger>(
-      () => PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: true));
+  sl.registerLazySingleton<PrettyDioLogger>(() => PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: true));
 
   // core
   sl.registerLazySingleton<CacheClient>(() => CacheClient(sl<GetStorage>()));
@@ -43,12 +45,15 @@ Future<void> init() async {
   sl.registerLazySingleton<ApiClient>(() => ApiClient(sl<Dio>(), sl<CacheClient>(), sl<PrettyDioLogger>()));
 
   // Repositories
+  sl.registerLazySingleton<AuthRepo>(() => AuthRepo(sl<ApiClient>(), sl<CacheClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<RegionsRepo>(() => RegionsRepo(sl<ApiClient>(), sl<NetworkInfo>()));
 
   // Controllers
   sl.registerFactory<L10nController>(() => L10nController(sl<CacheClient>()));
   sl.registerFactory<OnBoardingController>(() => OnBoardingController());
-  sl.registerFactory<SignInController>(() => SignInController());
-  sl.registerFactory<SignUpController>(() => SignUpController());
+  sl.registerFactory<RegionsController>(() => RegionsController(sl<RegionsRepo>()));
+  sl.registerFactory<LoginController>(() => LoginController(sl<AuthRepo>()));
+  sl.registerFactory<RegistrationController>(() => RegistrationController(sl<AuthRepo>()));
   sl.registerFactory<LayoutController>(() => LayoutController());
   sl.registerFactory<FollowingController>(() => FollowingController());
   sl.registerFactory<AccountController>(() => AccountController());

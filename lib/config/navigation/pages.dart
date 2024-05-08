@@ -9,29 +9,36 @@ import 'package:ecommerce/modules/payment/binding/add_payment_method_binding.dar
 import 'package:ecommerce/modules/payment/binding/payment_methods_binding.dart';
 import 'package:ecommerce/modules/payment/view/screens/add_payment_method_screen.dart';
 import 'package:ecommerce/modules/payment/view/screens/payment_methods_screen.dart';
-import 'package:ecommerce/modules/product/binding/product_detail_binding.dart';
-import 'package:ecommerce/modules/product/views/screens/product_detail_screen.dart';
 import 'package:ecommerce/modules/settings/views/screens/choose_components_screen.dart';
 import 'package:get/get.dart';
 import '../../modules/account/binding/account_binding.dart';
 import '../../modules/account/view/screens/account_screen.dart';
-import '../../modules/addresses/binding/add_new_address_binding.dart';
 import '../../modules/addresses/binding/addresses_binding.dart';
 import '../../modules/addresses/binding/choose_on_map_binding.dart';
-import '../../modules/addresses/view/screens/add_new_address_screen.dart';
+import '../../modules/addresses/view/screens/address_form_screen.dart';
 import '../../modules/addresses/view/screens/addresses_screen.dart';
 import '../../modules/addresses/view/screens/choose_on_map_screen.dart';
-import '../../modules/auth/binding/sign_in_binding.dart';
-import '../../modules/auth/binding/sign_up_binding.dart';
-import '../../modules/auth/view/screens/sign_in_screen.dart';
-import '../../modules/auth/view/screens/sign_up_screen.dart';
+import '../../modules/auth/binding/login_binding.dart';
+import '../../modules/auth/binding/registration_binding.dart';
+import '../../modules/auth/view/screens/login_screen.dart';
+import '../../modules/auth/view/screens/registration_screen.dart';
+import '../../modules/categories/view/screens/all_categories_screen.dart';
+import '../../modules/categories/view/screens/category_products_screen.dart';
+import '../../modules/order/views/screens/my_orders_screen.dart';
 import '../../modules/payment/binding/add_card_binding.dart';
 import '../../modules/payment/view/screens/add_card_screen.dart';
+import '../../modules/product/views/screens/product_details_screen.dart';
+import '../../modules/search/view/screens/search_screen.dart';
 import '../../modules/settings/views/screens/language_screen.dart';
 import 'navigation.dart';
 
 class Pages {
   static final List<GetPage> pages = [
+    // GetPage(
+    //   name: Routes.splashScreen,
+    //   page: () => const SplashScreen(),
+    //   transition: Transition.cupertino,
+    // ),
     GetPage(
       name: Routes.onBoardingScreen,
       page: () => const OnBoardingScreen(),
@@ -44,15 +51,15 @@ class Pages {
       transition: Transition.cupertino,
     ),
     GetPage(
-      name: Routes.signInScreen,
-      page: () => SignInScreen(),
-      bindings: [SignInBinding()],
+      name: Routes.loginScreen,
+      page: () => LoginScreen(),
+      bindings: [LoginBinding()],
       transition: Transition.cupertino,
     ),
     GetPage(
-      name: Routes.signUpScreen,
-      page: () => SignUpScreen(),
-      bindings: [SignUpBinding()],
+      name: Routes.registrationScreen,
+      page: () => RegistrationScreen(),
+      bindings: [RegistrationBinding()],
       transition: Transition.cupertino,
     ),
     GetPage(
@@ -98,9 +105,8 @@ class Pages {
       transition: Transition.cupertino,
     ),
     GetPage(
-      name: Routes.addNewAddressScreen,
-      page: () => AddNewAddressScreen(),
-      bindings: [AddNewAddressBinding()],
+      name: Routes.addressFormScreen,
+      page: () => AddressFormScreen(),
       transition: Transition.cupertino,
     ),
     GetPage(
@@ -110,9 +116,8 @@ class Pages {
       transition: Transition.cupertino,
     ),
     GetPage(
-      name: Routes.productDetailScreen,
+      name: Routes.productDetailsScreen,
       page: () => ProductDetailsScreen(),
-      bindings: [ProductDetailBinding()],
       transition: Transition.cupertino,
     ),
     GetPage(
@@ -122,144 +127,29 @@ class Pages {
       transition: Transition.cupertino,
     ),
     GetPage(
+      name: Routes.myOrdersScreen,
+      page: () => MyOrdersScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
       name: Routes.successfulOrderScreen,
       page: () => SuccessfulOrderScreen(),
       transition: Transition.cupertino,
     ),
-    // GetPage(
-    //   name: Routes.filterScreen,
-    //   page: () => FilterScreen(),
-    //   bindings: [FilterBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-
-    // GetPage(
-    //   name: Routes.homeScreenContainerScreen,
-    //   page: () => HomeScreenContainerScreen(),
-    //   bindings: [HomeScreenContainerBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.productDetailOverviewScreen,
-    //   page: () => ProductDetailOverviewScreen(),
-    //   bindings: [ProductDetailOverviewBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.shoppingCartContinueOrderScreen,
-    //   page: () => ShoppingCartContinueOrderScreen(),
-    //   bindings: [ShoppingCartContinueOrderBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.successfulOrderScreen,
-    //   page: () => SuccessfulOrderScreen(),
-    //   bindings: [SuccessfulOrderBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.sellerDetailsScreen,
-    //   page: () => SellerDetailsScreen(),
-    //   bindings: [SellerDetailsBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.favouritesScreen,
-    //   page: () => FavouritesScreen(),
-    //   bindings: [FavouritesBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.verificationScreen,
-    //   page: () => VerificationScreen(),
-    //   bindings: [VerificationBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.categoriesTabContainerScreen,
-    //   page: () => CategoriesTabContainerScreen(),
-    //   bindings: [CategoriesTabContainerBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.searchScreen,
-    //   page: () => SearchScreen(),
-    //   bindings: [SearchBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.searchResultsScreen,
-    //   page: () => SearchResultsScreen(),
-    //   bindings: [SearchResultsBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-
-    // GetPage(
-    //   name: Routes.languageScreen,
-    //   page: () => LanguageScreen(),
-    //   bindings: [LanguageBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.myOrdersScreen,
-    //   page: () => MyOrdersScreen(),
-    //   bindings: [MyOrdersBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.paymentMethodsScreen,
-    //   page: () => PaymentMethodsScreen(),
-    //   bindings: [PaymentMethodsBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-
-    // GetPage(
-    //   name: Routes.sellersScreen,
-    //   page: () => SellersScreen(),
-    //   bindings: [SellersBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.changePasswordScreen,
-    //   page: () => ChangePasswordScreen(),
-    //   bindings: [ChangePasswordBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.emptyCartTabContainerScreen,
-    //   page: () => EmptyCartTabContainerScreen(),
-    //   bindings: [EmptyCartTabContainerBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.emptyCartOneScreen,
-    //   page: () => EmptyCartOneScreen(),
-    //   bindings: [EmptyCartOneBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.emptyFavouritesScreen,
-    //   page: () => EmptyFavouritesScreen(),
-    //   bindings: [EmptyFavouritesBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.sideMenuScreen,
-    //   page: () => SideMenuScreen(),
-    //   bindings: [SideMenuBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.appNavigationScreen,
-    //   page: () => AppNavigationScreen(),
-    //   bindings: [AppNavigationBinding()],
-    //   transition: Transition.cupertino,
-    // ),
-    // GetPage(
-    //   name: Routes.initialRoute,
-    //   page: () => FilterScreen(),
-    //   bindings: [FilterBinding()],
-    //   transition: Transition.cupertino,
-    // )
+    GetPage(
+      name: Routes.allCategoriesScreen,
+      page: () => AllCategoriesScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: Routes.categoryProductsScreen,
+      page: () => CategoryProductsScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: Routes.searchScreen,
+      page: () => SearchScreen(),
+      transition: Transition.cupertino,
+    ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/resources/app_values.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,9 +38,9 @@ class CustomDropDownField<T> extends StatelessWidget {
     this.autoValidateMode,
     this.iconSize = AppSize.s24,
     this.isLoadingValues = false,
-    Key? key,
+    super.key,
     this.dropdownColor = AppColors.white,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +57,21 @@ class CustomDropDownField<T> extends StatelessWidget {
           value: isLoadingValues ? null : value,
           onTap: onTap,
           icon: isLoadingValues
-              ? const SizedBox(
-                  height: AppSize.s16,
-                  width: AppSize.s16,
-                  child: CircularProgressIndicator(strokeWidth: AppSize.s1_5, color: AppColors.black),
+              ? const Padding(
+                  padding: EdgeInsetsDirectional.only(end: AppPadding.p16),
+                  child: SizedBox(
+                    height: AppSize.s16,
+                    width: AppSize.s16,
+                    child: CircularProgressIndicator.adaptive(
+                      strokeWidth: AppSize.s1_5,
+                      backgroundColor: AppColors.black,
+                    ),
+                  ),
                 )
               : CustomImage(
                   image: AppImages.imgFrame159Black900,
-                  height: 20.v,
-                  width: 28.h,
+                  height: 25.v,
+                  width: 33.h,
                   margin: EdgeInsets.symmetric(horizontal: 8.h),
                 ),
           iconSize: iconSize,
@@ -72,7 +79,13 @@ class CustomDropDownField<T> extends StatelessWidget {
           hint: hintText != null
               ? CustomText(
                   hintText!,
-                  style: const TextStyle(fontSize: FontSize.s12, color: AppColors.grey),
+                  style: TextStyle(
+                    color: AppColors.textFieldBorder,
+                    fontSize: FontSize.s14,
+                    height: 1,
+                    fontWeight: FontWeightManager.regular,
+                    fontFamily: FontConstants.englishFontFamily
+                  ),
                 )
               : null,
           isDense: true,
@@ -81,7 +94,12 @@ class CustomDropDownField<T> extends StatelessWidget {
           dropdownColor: dropdownColor,
           decoration: InputDecoration(
             hintText: hintText ?? "",
-            hintStyle: Get.theme.textTheme.bodyMedium,
+            hintStyle: TextStyle(
+              color: AppColors.textFieldBorder,
+              fontSize: FontSize.s14,
+              height: 1,
+              fontWeight: FontWeightManager.regular,
+            ),
             prefixIcon: prefix != null
                 ? Padding(
                     padding: const EdgeInsetsDirectional.only(start: AppPadding.p12, end: AppPadding.p4),

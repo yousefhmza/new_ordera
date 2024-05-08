@@ -96,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 OptionItem(
                   text: AppStrings.lblSignOut.tr,
-                  onTap: () => Get.offAllNamed(Routes.signInScreen),
+                  onTap: () => Get.offAllNamed(Routes.loginScreen),
                   showDivider: false,
                   isBold: true,
                   color: AppColors.red500,

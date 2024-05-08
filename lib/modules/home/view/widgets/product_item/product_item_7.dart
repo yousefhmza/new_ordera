@@ -13,7 +13,7 @@ class ProductItem7 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.productDetailScreen),
+      onTap: () => Get.toNamed(Routes.productDetailsScreen),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.primary.withOpacity(0.05),

@@ -34,11 +34,10 @@ const Map<String, String> english = {
   "lbl_create_account": "Create Account",
   "msg_already_have_an": "Already have an account? LOGIN",
   "msg_already_have_an2": "Already have an account? ",
-  "msg_by_pressing_on_button":
-  "By pressing on button, that means you agree on Terms & Conditions ",
-  "msg_by_pressing_on_button2":
-  "By pressing on button, that means you agree on ",
+  "msg_by_pressing_on_button": "By pressing on button, that means you agree on Terms & Conditions ",
+  "msg_by_pressing_on_button2": "By pressing on button, that means you agree on ",
   "msg_terms_conditions": "Terms & Conditions ",
+  "msg_signed_up_successfully": "Signed up successfully",
 
   // Home / Screen Screen
   "lbl4": "اشتري الأن",
@@ -68,7 +67,7 @@ const Map<String, String> english = {
   "lbl_mohamed": "Mohamed",
   "lbl_product_details": "Product Details",
   "lbl_rate_product": "Rate Product",
-  "lbl_reviews_102": "Reviews (102)",
+  "lbl_reviews_102": "Reviews",
   "msg2":
   "هذه مساحة تم توليدها للكتابة فيها من خلال نصوص عربية و يمكن ان تستخدم لكتابة اي شئ يصف المنتج و يعبر عنه من خلال البائع و يقرأه المستخدم لمعرفة تفاصيل اكثر عن المنتج",
   "msg3":
@@ -92,10 +91,19 @@ const Map<String, String> english = {
   "lbl_taxes": "Taxes",
   "lbl_total": "Total",
   "msg_choose_payment_method": "Choose Payment Method",
+  "msg_choose_address": "Please Choose shipping address",
 
   // Successful Order Screen
   "lbl_go_back_home": "Go Back Home", "lbl_review_order": "Review Order",
   "msg_your_order_is_successfully": "Your order is successfully purchased",
+  "lbl_pending": "Pending",
+  "lbl_processing": "Processing",
+  "lbl_onHold": "On-hold",
+  "lbl_completed": "Completed",
+  "lbl_cancelled": "Cancelled",
+  "lbl_refunded": "Refunded",
+  "lbl_failed": "Failed",
+  "lbl_trash": "Trash",
 
   // Seller Details Screen
   "lbl_follow": "Follow", "lbl_seller_details": "Seller Details",
@@ -129,13 +137,14 @@ const Map<String, String> english = {
   "lbl_private": "Private",
   "msg_account_settings": "Account Settings",
   "msg_terms_conditions2": "Terms & Conditions",
+  "msg_signed_out_successfully": "Signed out successfully",
+  "msg_sure_sign_out": "Are you sure you want to sign out?",
 
   // Language Screen
   "lbl5": "العربية", "lbl_english": "English",
 
   // My Orders Screen
   "lbl_66945239562": "#66945239562",
-  "lbl_cancelled": "Cancelled",
   "lbl_delivered": "Delivered",
   "lbl_on_delivery": "On Delivery",
   "lbl_order_no": "Order NO.",
@@ -159,6 +168,7 @@ const Map<String, String> english = {
 
   // Add New Address Screen
   "lbl_add": "Add",
+  "lbl_edit": "Edit",
   "lbl_address": "Address",
   "lbl_house_no": "House No.",
   "lbl_landmark": "Landmark",
@@ -168,6 +178,9 @@ const Map<String, String> english = {
   "msg_type_a_landmark": "Type a Landmark Around You",
   "msg_type_your_house": "Type your house number",
   "msg_your_home_number": "Your Home Number",
+  "lbl_home_address": "Home",
+  "lbl_workplace_address": "Workplace",
+  "msg_sure_deleting_address": "Are you sure you want to delete this address ?",
 
   // Choose On Map Screen
   "lbl_choose": "Choose",
@@ -185,6 +198,10 @@ const Map<String, String> english = {
   // Empty Cart One Screen
   "msg_you_haven_t_added": "You haven’t added anything to your cart",
   "msg_your_cart_is_empty": "Your Cart Is Empty",
+  "msg_product_added_to_cart": "Product added to cart",
+  "msg_product_already_in_cart": "Product already in cart",
+  "msg_sure_remove_from_cart": "Are you sure you want to remove this product from your cart?",
+  "msg_sure_clearing_cart": "Are you sure you want to remove all products from your cart?",
 
   // Empty Favourites Screen
   "msg_you_haven_t_added2": "You haven’t added anything to your Favourites",
@@ -200,6 +217,7 @@ const Map<String, String> english = {
   "lbl_7878": "****-7878",
   "lbl_account": "Account",
   "lbl_add_new_address": "Add New Address",
+  "lbl_edit_address": "Edit Address",
   "lbl_addresses": "Addresses",
   "lbl_apply": "Apply",
   "lbl_back": "Back",
@@ -215,6 +233,11 @@ const Map<String, String> english = {
   "lbl_favourites": "Favourites",
   "lbl_following": "Following",
   "lbl_full_name": "Full Name",
+  "lbl_first_name": "First Name",
+  "lbl_last_name": "Last Name",
+  "lbl_user_name": "User Name",
+  "lbl_email": "Email",
+  "msg_retry": "Retry",
   "lbl_general": "General",
   "lbl_home_appliances": "Home Appliances",
   "lbl_language": "Language",
@@ -244,13 +267,15 @@ const Map<String, String> english = {
   "msg_add_new_payment": "Add New Payment Method",
   "msg_discount_code_3": "Discount code \$3",
   "msg_headphone_tma2": "Headphone TMA - 2",
-  "msg_lorem_ipsum_dolor":
-  "Lorem ipsum dolor sit amet, consectetur adipiscing,\nsed do eiusmod tempor ut labore",
+  "msg_lorem_ipsum_dolor": "Lorem ipsum dolor sit amet, consectetur adipiscing,\nsed do eiusmod tempor ut labore",
   "msg_mohamedali_gmail_com": "mohamedali@gmail.com",
   "msg_nike_running_shoes2": "Nike Running Shoes",
   "msg_re_type_password": "Re-Type Password",
   "msg_suggested_products": "Suggested Products",
   "msg_unknown_error": "Unknown error occurred",
+  "lbl_no": "No",
+  "lbl_yes": "Yes",
+  "usd": "USD",
 
 // Network Error String
   "msg_network_err": "Network Error",
@@ -262,4 +287,9 @@ const Map<String, String> english = {
   "err_msg_please_enter_valid_text": "Please enter valid text",
   "err_msg_please_enter_valid_phone_number": "Please enter valid phone number",
   "err_msg_please_enter_valid_number": "Please enter valid number",
+  "err_msg_passwords_dont_match": "Passwords don't match",
+  "err_msg_required": "Required !!",
+  "country": "Country",
+  "state": "State",
+  "city": "City",
 };

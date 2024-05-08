@@ -9,6 +9,8 @@ class AppStrings {
   static const String lblTo = "lbl_to";
   static const String msgHighestToLowest = "msg_highest_to_lowest";
 
+  static const String retry = "msg_retry";
+
   // iPhone 13 mini - Three Screen
   static const String lblPurchaseOnline = "lbl_purchase_online";
 
@@ -37,6 +39,7 @@ class AppStrings {
   static const String msgByPressingOnButton = "msg_by_pressing_on_button";
   static const String msgByPressingOnButton2 = "msg_by_pressing_on_button2";
   static const String msgTermsConditions = "msg_terms_conditions";
+  static const String msgSignedUpSuccessfully = "msg_signed_up_successfully";
 
   // Home / Screen Screen
   static const String lbl4 = "lbl4";
@@ -88,10 +91,19 @@ class AppStrings {
   static const String lblTaxes = "lbl_taxes";
   static const String lblTotal = "lbl_total";
   static const String msgChoosePaymentMethod = "msg_choose_payment_method";
+  static const String msgChooseAddress = "msg_choose_address";
 
   // Successful Order Screen
   static const String lblGoBackHome = "lbl_go_back_home";
   static const String lblReviewOrder = "lbl_review_order";
+  static const String lblPending = "Pending";
+  static const String lblProcessing = "Processing";
+  static const String lblOnHold = "On-hold";
+  static const String lblCompleted = "Completed";
+  static const String lblCancelled = "Cancelled";
+  static const String lblRefunded = "Refunded";
+  static const String lblFailed = "Failed";
+  static const String lblTrash = "Trash";
   static const String msgYourOrderIsSuccessfully = "msg_your_order_is_successfully";
 
   // Seller Details Screen
@@ -128,6 +140,8 @@ class AppStrings {
   static const String lblPrivate = "lbl_private";
   static const String msgAccountSettings = "msg_account_settings";
   static const String msgTermsConditions2 = "msg_terms_conditions2";
+  static const String msgSignedOutSuccessfully = "msg_signed_out_successfully";
+  static const String msgSureSignOut = "msg_sure_sign_out";
 
   // Language Screen
   static const String lbl5 = "lbl5";
@@ -135,7 +149,6 @@ class AppStrings {
 
   // My Orders Screen
   static const String lbl66945239562 = "lbl_66945239562";
-  static const String lblCancelled = "lbl_cancelled";
   static const String lblDelivered = "lbl_delivered";
   static const String lblOnDelivery = "lbl_on_delivery";
   static const String lblOrderNo = "lbl_order_no";
@@ -159,6 +172,7 @@ class AppStrings {
 
   // Add New Address Screen
   static const String lblAdd = "lbl_add";
+  static const String lblEdit = "lbl_edit";
   static const String lblAddress = "lbl_address";
   static const String lblHouseNo = "lbl_house_no";
   static const String lblLandmark = "lbl_landmark";
@@ -168,6 +182,9 @@ class AppStrings {
   static const String msgTypeALandmark = "msg_type_a_landmark";
   static const String msgTypeYourHouse = "msg_type_your_house";
   static const String msgYourHomeNumber = "msg_your_home_number";
+  static const String lblHomeAddress = "lbl_home_address";
+  static const String lblWorkplaceAddress = "lbl_workplace_address";
+  static const String msgSureDeletingAddress = "msg_sure_deleting_address";
 
   // Choose On Map Screen
   static const String lblChoose = "lbl_choose";
@@ -187,6 +204,10 @@ class AppStrings {
   // Empty Cart One Screen
   static const String msgYouHavenTAdded = "msg_you_haven_t_added";
   static const String msgYourCartIsEmpty = "msg_your_cart_is_empty";
+  static const String msgProductAddedToCart = "msg_product_added_to_cart";
+  static const String msgProductAlreadyInCart = "msg_product_already_in_cart";
+  static const String msgSureRemoveFromCart = "msg_sure_remove_from_cart";
+  static const String msgSureClearingCart = "msg_sure_clearing_cart";
 
   // Empty Favourites Screen
   static const String msgYouHavenTAdded2 = "msg_you_haven_t_added2";
@@ -202,6 +223,7 @@ class AppStrings {
   static const String lbl7878 = "lbl_7878";
   static const String lblAccount = "lbl_account";
   static const String lblAddNewAddress = "lbl_add_new_address";
+  static const String lblEditAddress = "lbl_edit_address";
   static const String lblAddresses = "lbl_addresses";
   static const String lblApply = "lbl_apply";
   static const String lblBack = "lbl_back";
@@ -217,6 +239,10 @@ class AppStrings {
   static const String lblFavourites = "lbl_favourites";
   static const String lblFollowing = "lbl_following";
   static const String lblFullName = "lbl_full_name";
+  static const String lblFirstName = "lbl_first_name";
+  static const String lblLastName = "lbl_last_name";
+  static const String lblUserName = "lbl_user_name";
+  static const String lblEmail = "lbl_email";
   static const String lblGeneral = "lbl_general";
   static const String lblHomeAppliances = "lbl_home_appliances";
   static const String lblLanguage = "lbl_language";
@@ -252,6 +278,9 @@ class AppStrings {
   static const String msgReTypePassword = "msg_re_type_password";
   static const String msgSuggestedProducts = "msg_suggested_products";
   static const String msgUnknownError = "msg_unknown_error";
+  static const String lblNo = "lbl_no";
+  static const String lblYes = "lbl_yes";
+  static const String usd = "usd";
 
   // Network Error String
   static const String msgNetworkErr = "msg_network_err";
@@ -263,5 +292,11 @@ class AppStrings {
   static const String errMsgPleaseEnterValidText = "err_msg_please_enter_valid_text";
   static const String errMsgPleaseEnterValidPhoneNumber = "err_msg_please_enter_valid_phone_number";
   static const String errMsgPleaseEnterValidNumber = "err_msg_please_enter_valid_number";
+  static const String errMsgPasswordsDontMatch = "err_msg_passwords_dont_match";
+  static const String errMsgRequired = "err_msg_required";
+  static const String signedOutSuccessfully = "signedOutSuccessfully";
+  static const String passwordChangedSuccessfully = "passwordChangedSuccessfully";
+  static const String country = "country";
+  static const String state = "state";
+  static const String city = "city";
 }
-

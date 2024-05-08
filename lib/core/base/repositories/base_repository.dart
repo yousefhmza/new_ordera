@@ -18,6 +18,10 @@ abstract class BaseRepository {
     if (hasConnection) {
       try {
         final response = await httpRequest();
+        if (response.statusCode != 200 && response.statusCode != 201) {
+          final String errorMessage = response.data["message"];
+          throw Exception(errorMessage);
+        }
         final data = successReturn(response.data); // Used callback to use the response data in repositories
         return Right(data);
       } on Exception catch (e) {

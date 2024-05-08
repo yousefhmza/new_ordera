@@ -4,12 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../resources/resources.dart';
-import '../../utils/constants.dart';
 import '../local/cache_client.dart';
 import '../local/storage_keys.dart';
 
-const String _baseURL = "https://sadeem-egypt.com:8443/";
-// const String _baseURL = "http://178.18.241.10:8080";
+const String _baseURL = "http://hexfashion.xyz/api/tenant/v1";
 const String _contentType = "Content-Type";
 const String _accept = "accept";
 const String _applicationJson = "application/json";
@@ -52,7 +50,7 @@ class ApiClient {
       queryParameters: queryParameters,
       options: Options(
         headers: {
-          _authorization: token != null ? "Bearer $token" : Constants.empty,
+          if (token != null) _authorization: "Bearer $token",
         },
       ),
     );
@@ -71,7 +69,7 @@ class ApiClient {
       data: requestBody,
       options: Options(
         headers: {
-          _authorization: token != null ? "Bearer $token" : Constants.empty,
+          if (token != null) _authorization: "Bearer $token",
         },
       ),
     );
@@ -89,7 +87,7 @@ class ApiClient {
       data: requestBody,
       options: Options(
         headers: {
-          _authorization: token != null ? "Bearer $token" : Constants.empty,
+          if (token != null) _authorization: "Bearer $token",
         },
       ),
     );
@@ -107,7 +105,7 @@ class ApiClient {
       data: requestBody,
       options: Options(
         headers: {
-          _authorization: token != null ? "Bearer $token" : Constants.empty,
+          if (token != null) _authorization: "Bearer $token",
         },
       ),
     );

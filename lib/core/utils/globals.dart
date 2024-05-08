@@ -1,6 +1,10 @@
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
+import 'package:ecommerce/modules/product/models/responses/product_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../modules/account/models/responses/user_model.dart';
 import '../../modules/categories/view/widgets/category_chip/category_chip_1.dart';
 import '../../modules/categories/view/widgets/category_chip/category_chip_2.dart';
 import '../../modules/categories/view/widgets/category_chip/category_chip_3.dart';
@@ -23,6 +27,7 @@ import '../../modules/home/view/components/home_appbar/home_appbar_8.dart';
 import '../../modules/home/view/components/home_appbar/home_appbar_9.dart';
 import '../../modules/home/view/components/home_appbar/home_appbar_10.dart';
 
+import '../../modules/home/view/widgets/product_item/product_item_10.dart';
 import '../../modules/home/view/widgets/product_item/product_item_1.dart';
 import '../../modules/home/view/widgets/product_item/product_item_2.dart';
 import '../../modules/home/view/widgets/product_item/product_item_3.dart';
@@ -33,16 +38,19 @@ import '../../modules/home/view/widgets/product_item/product_item_7.dart';
 import '../../modules/home/view/widgets/product_item/product_item_8.dart';
 import '../../modules/home/view/widgets/product_item/product_item_9.dart';
 import '../../modules/home/view/widgets/product_item/product_item_10.dart';
+import 'constants.dart';
 
-// Rx<UserModel?> currentUser = Rx(null);
+Rx<UserModel?> currentUser = Rx(null);
 
-final Settings settings = Settings(bnb: 0, productItem: 0, categoryChip: 0, appbar: 0);
+final Settings settings = Settings(bnb: 1, productItem: 1, categoryChip: 1, appbar: 1);
 
 class Settings {
   int bnb;
   int productItem;
   double? productItemHeight;
   double? productListViewHeight;
+  double? productInGridAspectRatio;
+  int? productInGridCrossAxisCount;
   int categoryChip;
   double? categoryChipsListViewHeight;
   double? categoryChipsSpacing;
@@ -99,47 +107,71 @@ class Settings {
       case 1:
         productItemHeight = 227.v;
         productListViewHeight = 227.v;
+        productInGridAspectRatio = 0.7;
+        productInGridCrossAxisCount = 2;
         break;
       case 2:
         productItemHeight = 240.v;
         productListViewHeight = 260.v;
+        productInGridAspectRatio = 1.1;
+        productInGridCrossAxisCount = 1;
+
         break;
       case 3:
         productItemHeight = 110.v;
         productListViewHeight = 130.v;
+        productInGridAspectRatio = 3.0;
+        productInGridCrossAxisCount = 1;
+
         break;
       case 4:
         productItemHeight = 110.v;
         productListViewHeight = 130.v;
+        productInGridAspectRatio = 0.76;
+        productInGridCrossAxisCount = 1;
+
         break;
       case 5:
         productItemHeight = 250.v;
         productListViewHeight = 270.v;
+        productInGridAspectRatio = 0.76;
+        productInGridCrossAxisCount = 2;
+
         break;
       case 6:
         productItemHeight = 240.v;
         productListViewHeight = 260.v;
+        productInGridAspectRatio = 0.85;
+        productInGridCrossAxisCount = 2;
         break;
       case 7:
         productItemHeight = 227.v;
         productListViewHeight = 227.v;
+        productInGridAspectRatio = 0.7;
+        productInGridCrossAxisCount = 2;
         break;
       case 8:
         productItemHeight = 250.v;
         productListViewHeight = 270.v;
+        productInGridAspectRatio = 0.75;
+        productInGridCrossAxisCount = 2;
         break;
       case 9:
         productItemHeight = 270.v;
         productListViewHeight = 290.v;
+        productInGridAspectRatio = 0.75;
+        productInGridCrossAxisCount = 2;
         break;
       case 10:
         productItemHeight = 240.v;
         productListViewHeight = 260.v;
+        productInGridAspectRatio = 1.1;
+        productInGridCrossAxisCount = 1;
         break;
     }
   }
 
-  Widget get getProductItem {
+  Widget getProductItem({ Product? product, bool dynamicDimensions = false}) {
     switch (productItem) {
       case 1:
         return ProductItem1();
@@ -178,8 +210,8 @@ class Settings {
         categoryChipsListViewHeight = 32.v;
         categoryChipsSpacing = 24.h;
         break;
-      // categoryChipsListViewHeight = 48.v;
-      // break;
+    // categoryChipsListViewHeight = 48.v;
+    // break;
       case 4:
         categoryChipsListViewHeight = 32.v;
         categoryChipsSpacing = 20.h;
@@ -203,21 +235,21 @@ class Settings {
         categoryChipsListViewHeight = 40.v;
         categoryChipsSpacing = 20.h;
         break;
-      // categoryChipsListViewHeight = 40.v;
-      // break;
+    // categoryChipsListViewHeight = 40.v;
+    // break;
       case 10:
         categoryChipsListViewHeight = 24.v;
         categoryChipsSpacing = 24.h;
         break;
-      // categoryChipsListViewHeight = 40.v;
-      // break;
+    // categoryChipsListViewHeight = 40.v;
+    // break;
     }
   }
 
-  Widget getCategoryChip({required bool isSelected, required VoidCallback onTap}) {
+  Widget getCategoryChip({ CategoryModel? category, required bool isSelected, required VoidCallback onTap}) {
     switch (categoryChip) {
       case 1:
-        return CategoryChip1(isSelected: isSelected, onTap: onTap);
+        return CategoryChip1( isSelected: isSelected, onTap: onTap);
       case 2:
         return CategoryChip2(isSelected: isSelected, onTap: onTap);
       case 3:

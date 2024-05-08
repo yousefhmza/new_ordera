@@ -25,6 +25,13 @@ class Validators {
     return null;
   }
 
+  static String? passwordConfirmationValidator(String? input, String? password) {
+    if (input.orEmpty.isEmpty || password.orEmpty.isEmpty || input.orEmpty != password) {
+      return AppStrings.errMsgPasswordsDontMatch.tr;
+    }
+    return null;
+  }
+
   static String? nameValidator(String? input) {
     if (!isText(input)) {
       return AppStrings.errMsgPleaseEnterValidText.tr;
@@ -32,11 +39,17 @@ class Validators {
     return null;
   }
 
-//
-// static String? notEmptyIntValidator(int? input) {
-//   return input.orZero == 0 ? AppStrings.requiredValidator : null;
-// }
-//
+  static String? required(String? input) {
+    if (input.orEmpty.isEmpty) {
+      return AppStrings.errMsgRequired.tr;
+    }
+    return null;
+  }
+
+  static String? notEmptyIntValidator(int? input) {
+    return input.orZero == 0 ? AppStrings.errMsgRequired.tr : null;
+  }
+
   static String? mobileNumberValidator(String? input) {
     if (!isValidPhone(input)) {
       return "err_msg_please_enter_valid_phone_number".tr;

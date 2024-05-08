@@ -35,33 +35,30 @@ class AddCardScreen extends GetWidget<AddCardController> {
               SizedBox(height: 22.v),
               CustomImage(image: AppImages.imgVisaCard,fit: BoxFit.contain),
               SizedBox(height: 25.v),
-              CustomTextFormField(
+              CustomTextField(
                 controller: controller.nameController,
                 hintText: AppStrings.msgCardHolderName.tr,
                 validator: Validators.nameValidator,
                 contentPadding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 16.v),
               ),
               SizedBox(height: 24.v),
-              CustomTextFormField(
+              CustomTextField(
                 controller: controller.cardNumberController,
                 hintText: AppStrings.lblCardNumber.tr,
-                textInputType: TextInputType.number,
+                keyBoardType: TextInputType.number,
                 validator: Validators.numberValidator,
                 contentPadding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 16.v),
-                borderDecoration: TextFormFieldStyleHelper.outlinePrimaryTL10,
               ),
               SizedBox(height: 24.v),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomTextFormField(
-                    width: 156.h,
+                  CustomTextField(
                     controller: controller.cvvController,
                     hintText: AppStrings.lblCvv.tr,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 16.v),
                   ),
-                  CustomTextFormField(
-                    width: 155.h,
+                  CustomTextField(
                     controller: controller.expiryDateController,
                     hintText: AppStrings.lblExpiryDate.tr,
                     textInputAction: TextInputAction.done,

@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/json_utils.dart';
 import 'package:ecommerce/modules/addresses/models/responses/address_model.dart';
-import 'package:ecommerce/modules/addresses/models/responses/region_model.dart';
+import 'package:ecommerce/modules/regions/models/region_model.dart';
 
 class UserModel {
   final int id;

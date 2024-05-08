@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/json_utils.dart';
 
-import 'region_model.dart';
+import '../../../regions/models/region_model.dart';
 
 class Address {
   final int id;

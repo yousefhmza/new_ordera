@@ -1,7 +1,6 @@
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/core/utils/validators.dart';
-import 'package:ecommerce/core/view/widgets/main_appbar.dart';
 import 'package:get/get.dart';
 
 import '../../../../config/theme/theme.dart';
@@ -50,27 +49,23 @@ class AccountScreen extends GetWidget<AccountController> {
                 ),
               ),
               SizedBox(height: 32.v),
-              CustomTextFormField(
+              CustomTextField(
                 controller: controller.fullNameController,
                 hintText: "lbl_full_name".tr,
                 suffix: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 13.v, 15.h, 13.v),
                   child: CustomImage(image: AppImages.imgIconUser, height: 24.adaptSize, width: 24.adaptSize),
                 ),
-                suffixConstraints: BoxConstraints(maxHeight: 50.v),
                 validator: Validators.nameValidator,
-                borderDecoration: TextFormFieldStyleHelper.outlineGrayTL10,
               ),
               SizedBox(height: 24.v),
-              CustomTextFormField(
+              CustomTextField(
                 controller: controller.emailController,
                 hintText: "msg_mohamedali_gmail_com".tr,
-                textInputType: TextInputType.emailAddress,
                 suffix: Container(
                   margin: EdgeInsets.fromLTRB(30.h, 13.v, 15.h, 13.v),
                   child: CustomImage(image: AppImages.imgIconMail, height: 24.adaptSize, width: 24.adaptSize),
                 ),
-                suffixConstraints: BoxConstraints(maxHeight: 50.v),
                 validator: Validators.emailValidator,
               ),
               SizedBox(height: 24.v),
@@ -93,12 +88,10 @@ class AccountScreen extends GetWidget<AccountController> {
                       ],
                     ),
                   ),
-                  CustomTextFormField(
-                    width: 202.h,
+                  CustomTextField(
                     controller: controller.mobileNoController,
                     hintText: "lbl_1113324289".tr,
                     textInputAction: TextInputAction.done,
-                    textInputType: TextInputType.phone,
                     validator: Validators.mobileNumberValidator,
                     contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 16.v),
                   )
