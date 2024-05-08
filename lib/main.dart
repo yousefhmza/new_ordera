@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       theme: lightTheme(),
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.onBoardingScreen,
+      initialRoute: Routes.splashScreen,
       getPages: Pages.pages,
       translations: L10n(),
       locale: Get.put(di.sl<L10nController>()).appLocale ?? Get.deviceLocale,

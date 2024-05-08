@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import '../../../../config/theme/custom_text_style.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/validators.dart';
+
 class LoginScreen extends GetWidget<LoginController> {
   const LoginScreen({super.key});
 
@@ -30,24 +32,26 @@ class LoginScreen extends GetWidget<LoginController> {
                     Text(AppStrings.lblHello.tr, style: Theme.of(context).textTheme.headlineSmall),
                     const VerticalSpace(18),
                     CustomTextField(
-                      textCapitalization: TextCapitalization.none,
-                      hintText: AppStrings.lblUserName.tr,
-                      suffix: CustomImage(image: AppImages.imgIconUser, height: 24.adaptSize, width: 24.adaptSize),
-                      // validator: Validators.nameValidator,
+                      keyBoardType: TextInputType.emailAddress,
+                      hintText: AppStrings.msgMohamedaliGmailCom.tr,
+                      suffix: CustomImage(image: AppImages.imgIconMail, height: 24.adaptSize, width: 24.adaptSize),
+                      validator: Validators.emailValidator,
                       onChanged: (value) => controller.loginBody.copyWith(email: value),
                     ),
                     const VerticalSpace(20),
                     Obx(
                       () => CustomTextField(
                         hintText: AppStrings.lblPassword.tr,
-                        textInputAction: TextInputAction.done,
-                        textCapitalization: TextCapitalization.none,
                         keyBoardType: TextInputType.visiblePassword,
                         suffix: InkWell(
                           onTap: () => controller.showPassword.value = !controller.showPassword.value,
-                          child: CustomImage(image: AppImages.imgViewlight, height: 24.adaptSize, width: 24.adaptSize),
+                          child: CustomImage(
+                            image: controller.showPassword.value ? AppImages.imgViewhidelight : AppImages.imgViewlight,
+                            height: 24.adaptSize,
+                            width: 24.adaptSize,
+                          ),
                         ),
-                        // validator: Validators.passwordValidator,
+                        validator: Validators.passwordValidator,
                         obscureText: !controller.showPassword.value,
                         onChanged: (value) => controller.loginBody.copyWith(password: value),
                       ),
@@ -59,15 +63,14 @@ class LoginScreen extends GetWidget<LoginController> {
                     ),
                     const VerticalSpace(22),
                     Obx(
-                      () => controller.isLoading.value
-                          ? const LoadingSpinner()
-                          : CustomButton(
-                              text: AppStrings.lblLogin.tr,
-                              onPressed: () async {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                controller.login();
-                              },
-                            ),
+                      () => CustomButton(
+                        isLoading: controller.isLoading.value,
+                        text: AppStrings.lblLogin.tr,
+                        onPressed: () async {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          controller.login();
+                        },
+                      ),
                     ),
                     const VerticalSpace(33),
                     GestureDetector(

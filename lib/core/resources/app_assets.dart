@@ -260,6 +260,7 @@ class AppIcons {
   static const String dropDownArrow = '$_iconsPath/drop_down_arrow.svg';
   static const String location = '$_iconsPath/location.svg';
   static const String location2 = '$_iconsPath/location_2.svg';
+  static const String logo = '$_iconsPath/logo.svg';
   static const String menu = '$_iconsPath/menu.svg';
   static const String menuVariant = '$_iconsPath/menu_variant.svg';
   static const String pizza = '$_iconsPath/pizza.svg';

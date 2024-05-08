@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce/config/localization/controller/l10n_controller.dart';
 import 'package:ecommerce/modules/account/controller/account_controller.dart';
+import 'package:ecommerce/modules/account/repositories/account_repo.dart';
 import 'package:ecommerce/modules/addresses/controller/add_new_address_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/addresses_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/choose_on_map_controller.dart';
@@ -12,7 +13,10 @@ import 'package:ecommerce/modules/categories/controller/categories_controller.da
 import 'package:ecommerce/modules/following/controller/following_controller.dart';
 import 'package:ecommerce/modules/home/controller/home_controller.dart';
 import 'package:ecommerce/modules/layout/controller/layout_controller.dart';
+import 'package:ecommerce/modules/legal/controllers/terms_and_conditions_controller.dart';
+import 'package:ecommerce/modules/legal/repo/legal_repo.dart';
 import 'package:ecommerce/modules/on_boarding/controller/on_boarding_controller.dart';
+import 'package:ecommerce/modules/on_boarding/repositories/on_boarding_repo.dart';
 import 'package:ecommerce/modules/order/controller/order_controller.dart';
 import 'package:ecommerce/modules/payment/controller/add_card_controller.dart';
 import 'package:ecommerce/modules/payment/controller/add_payment_method_controller.dart';
@@ -20,6 +24,7 @@ import 'package:ecommerce/modules/payment/controller/payment_methods_controller.
 import 'package:ecommerce/modules/product/controller/product_detail_controller.dart';
 import 'package:ecommerce/modules/regions/controllers/regions_controller.dart';
 import 'package:ecommerce/modules/regions/repositories/regions_repo.dart';
+import 'package:ecommerce/modules/spalsh/controller/splash_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -37,7 +42,8 @@ Future<void> init() async {
   sl.registerLazySingleton<GetStorage>(() => GetStorage());
   sl.registerLazySingleton<Dio>(() => Dio());
   sl.registerLazySingleton<Connectivity>(() => Connectivity());
-  sl.registerLazySingleton<PrettyDioLogger>(() => PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: true));
+  sl.registerLazySingleton<PrettyDioLogger>(
+      () => PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: true));
 
   // core
   sl.registerLazySingleton<CacheClient>(() => CacheClient(sl<GetStorage>()));
@@ -46,11 +52,15 @@ Future<void> init() async {
 
   // Repositories
   sl.registerLazySingleton<AuthRepo>(() => AuthRepo(sl<ApiClient>(), sl<CacheClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<AccountRepo>(() => AccountRepo(sl<ApiClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<OnBoardingRepo>(() => OnBoardingRepo(sl<CacheClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<RegionsRepo>(() => RegionsRepo(sl<ApiClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<LegalRepo>(() => LegalRepo(sl<ApiClient>(), sl<NetworkInfo>()));
 
   // Controllers
   sl.registerFactory<L10nController>(() => L10nController(sl<CacheClient>()));
-  sl.registerFactory<OnBoardingController>(() => OnBoardingController());
+  sl.registerFactory<SplashController>(() => SplashController(sl<OnBoardingRepo>(), sl<AuthRepo>(), sl<AccountRepo>()));
+  sl.registerFactory<OnBoardingController>(() => OnBoardingController(sl<OnBoardingRepo>()));
   sl.registerFactory<RegionsController>(() => RegionsController(sl<RegionsRepo>()));
   sl.registerFactory<LoginController>(() => LoginController(sl<AuthRepo>()));
   sl.registerFactory<RegistrationController>(() => RegistrationController(sl<AuthRepo>()));
@@ -68,4 +78,5 @@ Future<void> init() async {
   sl.registerFactory<CartController>(() => CartController());
   sl.registerFactory<CategoriesController>(() => CategoriesController());
   sl.registerFactory<OrderController>(() => OrderController());
+  sl.registerFactory<TermsAndConditionsController>(() => TermsAndConditionsController(sl<LegalRepo>()));
 }

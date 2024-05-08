@@ -12,12 +12,12 @@ class LegalRepo extends BaseRepository {
 
   LegalRepo(this._apiClient, super.networkInfo);
 
-// Future<Either<Failure,String>> getTermsAndConditions() async {
-//   return super.call<String>(
-//     httpRequest: () => _apiClient.get(url: EndPoints.terms),
-//     successReturn: (data) => List<CategoryModel>.from(data.map((category) => CategoryModel.fromJson(category))),
-//   );
-// }
+  Future<Either<Failure, String>> getTermsAndConditions() async {
+    return super.call<String>(
+      httpRequest: () => _apiClient.get(url: EndPoints.terms),
+      successReturn: (data) => data["page_content"],
+    );
+  }
 //
 // Future<Either<Failure, PaginationModel<InListProductModel>>> getCategoryProducts(String categoryName) async {
 //   return super.call(

@@ -5,6 +5,7 @@ import 'package:ecommerce/modules/regions/views/components/regions_component.dar
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../config/navigation/navigation.dart';
 import '../../../../config/theme/theme.dart';
 import '../../../../core/utils/validators.dart';
 import '../../controller/registration_controller.dart';
@@ -37,12 +38,6 @@ class RegistrationScreen extends GetWidget<RegistrationController> {
                     onChanged: (value) => controller.registerBody.copyWith(userName: value),
                   ),
                   VerticalSpace(24.v),
-                  RegionsComponent(
-                    onChangeCountry: (country) => controller.registerBody.copyWith(countryId: country.id.toString()),
-                    onChangeState: (state) => controller.registerBody.copyWith(stateId: state.id.toString()),
-                    onChangeCity: (city) => controller.registerBody.copyWith(cityId: city.id.toString()),
-                  ),
-                  VerticalSpace(24.v),
                   CustomTextField(
                     hintText: AppStrings.msgMohamedaliGmailCom.tr,
                     keyBoardType: TextInputType.emailAddress,
@@ -52,37 +47,25 @@ class RegistrationScreen extends GetWidget<RegistrationController> {
                     onChanged: (value) => controller.registerBody.copyWith(email: value),
                   ),
                   VerticalSpace(24.v),
-                  // SizedBox(height: 24.v),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Container(
-                  //       width: 108.h,
-                  //       padding: EdgeInsets.symmetric(vertical: 12.v),
-                  //       decoration: AppDecoration.outlineGray.copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //         children: [
-                  //           Padding(
-                  //             padding: EdgeInsets.symmetric(vertical: 3.v),
-                  //             child: Text(AppStrings.lbl20.tr, style: CustomTextStyles.bodyMediumGray40001),
-                  //           ),
-                  //           CustomImage(image: AppImages.imgFrame159Gray40001, height: 24.v, width: 1.h),
-                  //           CustomImage(image: AppImages.imgExpandDown, height: 24.adaptSize, width: 24.adaptSize)
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     CustomTextFormField(
-                  //       width: 202.h,
-                  //       controller: controller.mobileNoController,
-                  //       hintText: AppStrings.lbl1113324289.tr,
-                  //       textInputType: TextInputType.phone,
-                  //       validator: Validators.mobileNumberValidator,
-                  //       contentPadding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 16.v),
-                  //     ),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 24.v),
+                  RegionsComponent(
+                    onChangeCountry: (country) => controller.registerBody.copyWith(countryId: country.id.toString()),
+                    onChangeState: (state) => controller.registerBody.copyWith(stateId: state.id.toString()),
+                    onChangeCity: (city) => controller.registerBody.copyWith(cityId: city.id.toString()),
+                  ),
+                  VerticalSpace(24.v),
+                  CustomTextField(
+                    hintText: AppStrings.lblPostalCode.tr,
+                    validator: Validators.required,
+                    onChanged: (value) => controller.registerBody.copyWith(zipCode: value),
+                  ),
+                  VerticalSpace(24.v),
+                  CustomTextField(
+                    hintText: AppStrings.lblPhone.tr,
+                    validator: (value) => Validators.mobileNumberValidator(value),
+                    keyBoardType: TextInputType.phone,
+                    onChanged: (value) => controller.registerBody.copyWith(mobile: value),
+                  ),
+                  VerticalSpace(24.v),
                   Obx(
                     () => CustomTextField(
                       hintText: AppStrings.lbl3.tr,
@@ -124,16 +107,15 @@ class RegistrationScreen extends GetWidget<RegistrationController> {
                   ),
                   SizedBox(height: 32.v),
                   Obx(
-                    () => controller.isLoading.value
-                        ? const LoadingSpinner()
-                        : CustomButton(
-                            text: AppStrings.lblCreateAccount.tr.toUpperCase(),
-                            buttonTextStyle: CustomTextStyles.titleSmallWhiteA700,
-                            onPressed: () {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              controller.register();
-                            },
-                          ),
+                    () => CustomButton(
+                      isLoading: controller.isLoading.value,
+                      text: AppStrings.lblCreateAccount.tr.toUpperCase(),
+                      buttonTextStyle: CustomTextStyles.titleSmallWhiteA700,
+                      onPressed: () {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        controller.register();
+                      },
+                    ),
                   ),
                   SizedBox(height: 17.v),
                   Container(
@@ -146,7 +128,15 @@ class RegistrationScreen extends GetWidget<RegistrationController> {
                             text: AppStrings.msgByPressingOnButton2.tr,
                             style: CustomTextStyles.labelMediumBlack900Medium,
                           ),
-                          TextSpan(text: AppStrings.msgTermsConditions.tr, style: CustomTextStyles.labelMediumMedium)
+                          WidgetSpan(
+                            child: InkWell(
+                              onTap: () => Get.toNamed(Routes.termsAndConditionsScreen),
+                              child: CustomText(
+                                AppStrings.msgTermsConditions.tr,
+                                style: CustomTextStyles.labelMediumMedium,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       textAlign: TextAlign.center,

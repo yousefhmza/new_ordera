@@ -46,8 +46,8 @@ class OnBoardingScreen extends GetWidget<OnBoardingController> {
               ),
               const VerticalSpace(AppSize.s32),
               Obx(
-                () => Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p18),
+                    () => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppPadding.p18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -67,10 +67,13 @@ class OnBoardingScreen extends GetWidget<OnBoardingController> {
                       Expanded(
                         child: CustomButton(
                           text: AppStrings.lblNext.tr,
-                          onPressed: () {
-                            controller.pageController.page == 2.0
-                                ? Get.toNamed(Routes.loginScreen)
-                                : controller.pageController.nextPage(duration: Time.t450ms, curve: Curves.easeInOut);
+                          onPressed: () async {
+                            if (controller.pageController.page == 2.0) {
+                              await controller.saveOnBoardingSeen();
+                              Get.toNamed(Routes.loginScreen);
+                            } else {
+                              controller.pageController.nextPage(duration: Time.t450ms, curve: Curves.easeInOut);
+                            }
                           },
                         ),
                       ),

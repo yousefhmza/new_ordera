@@ -10,7 +10,18 @@ class RegisterBody {
   String? termsConditions;
   String? zipCode;
 
-  RegisterBody();
+  RegisterBody({
+    this.userName,
+    this.password,
+    this.fullName,
+    this.email,
+    this.mobile,
+    this.countryId,
+    this.stateId,
+    this.cityId,
+    this.termsConditions = "on",
+    this.zipCode,
+  });
 
   void copyWith({
     String? userName,

@@ -54,13 +54,13 @@ class _RegionsComponentState extends State<RegionsComponent> {
       });
     }
 
-    // if (widget.cityInitId != null) {
-    //   regionsController.getAreas(widget.cityInitId!).then((value) {
-    //     if (widget.areaInitId != null) {
-    //       area = regionsController.areas.singleWhere((c) => c.id == widget.areaInitId);
-    //     }
-    //   });
-    // }
+    if (widget.stateInitId != null) {
+      regionsController.getCities(widget.stateInitId!).then((value) {
+        if (widget.cityInitId != null) {
+          city = regionsController.cities.singleWhere((c) => c.id == widget.cityInitId);
+        }
+      });
+    }
   }
 
   @override
@@ -113,7 +113,7 @@ class _RegionsComponentState extends State<RegionsComponent> {
               city = regionsController.cities.singleWhere((city) => city.id == id);
               widget.onChangeCity(city!);
             },
-            validator: Validators.notEmptyIntValidator,
+            // validator: Validators.notEmptyIntValidator,
             items: regionsController.cities
                 .map((city) => DropdownMenuItem(value: city.id, child: DropDownTitle(title: city.name)))
                 .toList(),

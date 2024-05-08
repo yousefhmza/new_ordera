@@ -26,11 +26,11 @@ class AuthRepo extends BaseRepository {
     return super.call<UserModel>(
       httpRequest: () async {
         final response = await _apiClient.post(url: EndPoints.login, requestBody: loginBody.toJson());
-        if (response.data["success"]) await _cacheClient.save(StorageKeys.token, response.data["token"]);
-        if (response.data["success"]) await _cacheClient.save(StorageKeys.isAuthed, true);
+        if (response.statusCode == 200) await _cacheClient.save(StorageKeys.token, response.data["token"]);
+        if (response.statusCode == 200) await _cacheClient.save(StorageKeys.isAuthed, true);
         return response;
       },
-      successReturn: (data) => UserModel.fromJson(data["user"]),
+      successReturn: (data) => UserModel.fromJson(data["users"]),
     );
   }
 
@@ -38,11 +38,11 @@ class AuthRepo extends BaseRepository {
     return super.call<UserModel>(
       httpRequest: () async {
         final response = await _apiClient.post(url: EndPoints.register, requestBody: registerBody.toJson());
-        if (response.data["success"]) await _cacheClient.save(StorageKeys.token, response.data["token"]);
-        if (response.data["success"]) await _cacheClient.save(StorageKeys.isAuthed, true);
+        if (response.statusCode == 200) await _cacheClient.save(StorageKeys.token, response.data["token"]);
+        if (response.statusCode == 200) await _cacheClient.save(StorageKeys.isAuthed, true);
         return response;
       },
-      successReturn: (data) => UserModel.fromJson(data["user"]),
+      successReturn: (data) => UserModel.fromJson(data["users"]),
     );
   }
 

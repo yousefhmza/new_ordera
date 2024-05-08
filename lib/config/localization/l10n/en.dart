@@ -292,4 +292,6 @@ const Map<String, String> english = {
   "country": "Country",
   "state": "State",
   "city": "City",
+  "lbl_postal_code": "Postal Code",
+  "lbl_phone": "Phone",
 };

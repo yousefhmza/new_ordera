@@ -299,4 +299,6 @@ class AppStrings {
   static const String country = "country";
   static const String state = "state";
   static const String city = "city";
+  static const String lblPostalCode = "lbl_postal_code";
+  static const String lblPhone= "lbl_phone";
 }

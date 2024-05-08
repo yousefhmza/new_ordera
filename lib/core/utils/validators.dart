@@ -33,7 +33,7 @@ class Validators {
   }
 
   static String? nameValidator(String? input) {
-    if (!isText(input)) {
+    if (!isText(input, isRequired: true)) {
       return AppStrings.errMsgPleaseEnterValidText.tr;
     }
     return null;
@@ -51,7 +51,7 @@ class Validators {
   }
 
   static String? mobileNumberValidator(String? input) {
-    if (!isValidPhone(input)) {
+    if (!isValidPhone(input,isRequired: true)) {
       return "err_msg_please_enter_valid_phone_number".tr;
     }
     return null;

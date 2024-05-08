@@ -1,5 +1,7 @@
 import 'package:ecommerce/modules/layout/binding/layout_binding.dart';
 import 'package:ecommerce/modules/layout/view/screens/layout_screen.dart';
+import 'package:ecommerce/modules/legal/binding/terms_and_conditions_binding.dart';
+import 'package:ecommerce/modules/legal/views/screens/terms_and_condition_screen.dart';
 import 'package:ecommerce/modules/on_boarding/binding/on_boarding_binding.dart';
 import 'package:ecommerce/modules/on_boarding/view/screens/on_boarding_screen.dart';
 import 'package:ecommerce/modules/order/binding/order_binding.dart';
@@ -10,6 +12,7 @@ import 'package:ecommerce/modules/payment/binding/payment_methods_binding.dart';
 import 'package:ecommerce/modules/payment/view/screens/add_payment_method_screen.dart';
 import 'package:ecommerce/modules/payment/view/screens/payment_methods_screen.dart';
 import 'package:ecommerce/modules/settings/views/screens/choose_components_screen.dart';
+import 'package:ecommerce/modules/spalsh/binding/splash_binding.dart';
 import 'package:get/get.dart';
 import '../../modules/account/binding/account_binding.dart';
 import '../../modules/account/view/screens/account_screen.dart';
@@ -30,15 +33,17 @@ import '../../modules/payment/view/screens/add_card_screen.dart';
 import '../../modules/product/views/screens/product_details_screen.dart';
 import '../../modules/search/view/screens/search_screen.dart';
 import '../../modules/settings/views/screens/language_screen.dart';
+import '../../modules/spalsh/view/screens/splash_screen.dart';
 import 'navigation.dart';
 
 class Pages {
   static final List<GetPage> pages = [
-    // GetPage(
-    //   name: Routes.splashScreen,
-    //   page: () => const SplashScreen(),
-    //   transition: Transition.cupertino,
-    // ),
+    GetPage(
+      name: Routes.splashScreen,
+      binding: SplashBinding(),
+      page: () => const SplashScreen(),
+      transition: Transition.cupertino,
+    ),
     GetPage(
       name: Routes.onBoardingScreen,
       page: () => const OnBoardingScreen(),
@@ -149,6 +154,12 @@ class Pages {
     GetPage(
       name: Routes.searchScreen,
       page: () => SearchScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: Routes.termsAndConditionsScreen,
+      binding: TermsAndConditionsBinding(),
+      page: () => TermsAndConditionScreen(),
       transition: Transition.cupertino,
     ),
   ];

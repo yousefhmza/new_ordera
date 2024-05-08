@@ -3,23 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../models/on_boarding_page_model.dart';
+import '../repositories/on_boarding_repo.dart';
 
 class OnBoardingController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    pageController.addListener(listenToPageController);
-  }
+  final OnBoardingRepo _onBoardingRepo;
 
-  @override
-  void onClose() {
-    super.onClose();
-    pageController.removeListener(listenToPageController);
-  }
-
-  void listenToPageController() {
-    pageController.page != null && pageController.page! > 0 ? showBackButton(true) : showBackButton(false);
-  }
+  OnBoardingController(this._onBoardingRepo);
 
   RxBool showBackButton = false.obs;
   final PageController pageController = PageController();
@@ -40,4 +29,24 @@ class OnBoardingController extends GetxController {
       desc: AppStrings.msgLoremIpsumDolor.tr,
     ),
   ];
+
+  @override
+  void onInit() {
+    super.onInit();
+    pageController.addListener(listenToPageController);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    pageController.removeListener(listenToPageController);
+  }
+
+  bool get onBoardingSeen => _onBoardingRepo.onBoardingSeen;
+
+  Future<void> saveOnBoardingSeen() => _onBoardingRepo.saveOnBoardingSeen();
+
+  void listenToPageController() {
+    pageController.page != null && pageController.page! > 0 ? showBackButton(true) : showBackButton(false);
+  }
 }
