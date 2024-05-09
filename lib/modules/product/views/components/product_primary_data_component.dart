@@ -1,10 +1,12 @@
+import 'package:ecommerce/core/extensions/color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/view/views.dart';
+import '../../controller/product_detail_controller.dart';
 
-class ProductPrimaryDataComponent extends StatelessWidget {
+class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
   const ProductPrimaryDataComponent({super.key});
 
   @override
@@ -19,12 +21,12 @@ class ProductPrimaryDataComponent extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: CustomText(
-                  "controller.product.value!.name",
+                  controller.product.value!.product.name,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    height: 1,
-                    fontWeight: FontWeightManager.bold,
-                    fontSize: FontSize.s32,
-                  ),
+                        height: 1,
+                        fontWeight: FontWeightManager.bold,
+                        fontSize: FontSize.s32,
+                      ),
                 ),
               ),
               const HorizontalSpace(AppSize.s8),
@@ -33,12 +35,12 @@ class ProductPrimaryDataComponent extends StatelessWidget {
                 child: Column(
                   children: [
                     CustomText(
-                      "${AppStrings.usd.tr} ${"controller.product.value!.price"}",
+                      "${AppStrings.usd.tr} ${controller.product.value!.product.salePrice.toStringAsFixed(1)}",
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeightManager.bold,
-                        fontSize: FontSize.s16,
-                        color: AppColors.primary,
-                      ),
+                            fontWeight: FontWeightManager.bold,
+                            fontSize: FontSize.s16,
+                            color: AppColors.primary,
+                          ),
                     ),
                     const VerticalSpace(AppSize.s4),
                     Row(
@@ -47,10 +49,10 @@ class ProductPrimaryDataComponent extends StatelessWidget {
                         const CustomIcon.svg(AppImages.imgStar, size: AppSize.s20),
                         const HorizontalSpace(AppSize.s4),
                         CustomText(
-                          "controller.product.value!.averageRating",
+                          controller.product.value!.avgRating.toStringAsFixed(1),
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeightManager.semiBold,
-                          ),
+                                fontWeight: FontWeightManager.semiBold,
+                              ),
                         ),
                       ],
                     )
@@ -69,10 +71,13 @@ class ProductPrimaryDataComponent extends StatelessWidget {
               ),
               const Spacer(),
               ...List.generate(
-                3,
-                    (index) => Padding(
+                controller.product.value!.product.color.length,
+                (index) => Padding(
                   padding: EdgeInsetsDirectional.only(start: AppPadding.p8),
-                  child: CircleAvatar(radius: AppSize.s8, backgroundColor: AppColors.black),
+                  child: CircleAvatar(
+                    radius: AppSize.s8,
+                    backgroundColor: HexColor.fromHex(controller.product.value!.product.color[index].colorCode),
+                  ),
                 ),
               ),
             ],

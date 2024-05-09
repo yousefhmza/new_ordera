@@ -11,6 +11,7 @@ import 'package:ecommerce/modules/payment/binding/add_payment_method_binding.dar
 import 'package:ecommerce/modules/payment/binding/payment_methods_binding.dart';
 import 'package:ecommerce/modules/payment/view/screens/add_payment_method_screen.dart';
 import 'package:ecommerce/modules/payment/view/screens/payment_methods_screen.dart';
+import 'package:ecommerce/modules/product/binding/product_detail_binding.dart';
 import 'package:ecommerce/modules/settings/views/screens/choose_components_screen.dart';
 import 'package:ecommerce/modules/spalsh/binding/splash_binding.dart';
 import 'package:get/get.dart';
@@ -122,6 +123,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.productDetailsScreen,
+      binding: ProductDetailBinding(),
       page: () => ProductDetailsScreen(),
       transition: Transition.cupertino,
     ),

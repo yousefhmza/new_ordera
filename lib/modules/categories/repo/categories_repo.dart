@@ -5,7 +5,7 @@ import 'package:ecommerce/core/services/error/failure.dart';
 import 'package:ecommerce/core/services/network/api_client.dart';
 import 'package:ecommerce/core/services/network/endpoints.dart';
 import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
-import 'package:ecommerce/modules/product/models/responses/in_list_rpduct_model.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 
 class CategoriesRepo extends BaseRepository {
   final ApiClient _apiClient;
@@ -15,7 +15,8 @@ class CategoriesRepo extends BaseRepository {
   Future<Either<Failure, List<CategoryModel>>> getAllCategories() async {
     return super.call(
       httpRequest: () => _apiClient.get(url: EndPoints.category),
-      successReturn: (data) => List<CategoryModel>.from(data.map((category) => CategoryModel.fromJson(category))),
+      successReturn: (data) =>
+          List<CategoryModel>.from(data["categories"].map((category) => CategoryModel.fromJson(category))),
     );
   }
 

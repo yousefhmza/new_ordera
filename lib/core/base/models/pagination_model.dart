@@ -1,3 +1,5 @@
+import 'package:ecommerce/core/utils/json_utils.dart';
+
 class PaginationModel<T> {
   final List<T> data;
   final int currentPage;
@@ -35,17 +37,17 @@ class PaginationModel<T> {
 
   factory PaginationModel.fromJson(Map<String, dynamic> json, List<T> data) => PaginationModel(
         data: data,
-        currentPage: json["current_page"] ?? 0,
-        totalItems: json["total_items"] ?? 0,
-        totalPage: json["total_page"] ?? 0,
-        nextPage: json["next_page"] ?? 0,
-        previousPage: json["previous_page"] ?? 0,
-        lastPage: json["last_page"] ?? 0,
-        perPage: json["per_page"] ?? 0,
-        path: json["path"] ?? "",
+        currentPage: JsonUtils.parseIntFromJson(json["current_page"]),
+        totalItems: JsonUtils.parseIntFromJson(json["total_items"]),
+        totalPage: JsonUtils.parseIntFromJson(json["total_page"]),
+        nextPage: JsonUtils.parseIntFromJson(json["next_page"]),
+        previousPage: JsonUtils.parseIntFromJson(json["previous_page"]),
+        lastPage: JsonUtils.parseIntFromJson(json["last_page"]),
+        perPage: JsonUtils.parseIntFromJson(json["per_page"]),
+        path: JsonUtils.parseStringFromJson(json["path"]),
         currentList: json["current_list"],
-        from: json["from"] ?? 0,
-        to: json["to"] ?? 0,
+        from: JsonUtils.parseIntFromJson(json["from"]),
+        to: JsonUtils.parseIntFromJson(json["to"]),
         onFirstPage: json["on_first_page"] ?? false,
         hasMorePages: json["hasMorePages"] ?? false,
         links: List<dynamic>.from(json["links"].map((x) => x)),

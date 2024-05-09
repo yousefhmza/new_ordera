@@ -51,7 +51,7 @@ class LoginScreen extends GetWidget<LoginController> {
                             width: 24.adaptSize,
                           ),
                         ),
-                        validator: Validators.passwordValidator,
+                        // validator: Validators.passwordValidator,
                         obscureText: !controller.showPassword.value,
                         onChanged: (value) => controller.loginBody.copyWith(password: value),
                       ),

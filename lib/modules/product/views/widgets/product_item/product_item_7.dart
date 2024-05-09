@@ -1,19 +1,24 @@
 import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../config/theme/theme.dart';
 import '../../../../../core/view/views.dart';
+import '../../../models/responses/product_model.dart';
 
 class ProductItem7 extends StatelessWidget {
-  const ProductItem7({super.key});
+  final InListProductModel product;
+  final bool dynamicDimensions;
+
+  const ProductItem7(this.product, {this.dynamicDimensions = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.productDetailsScreen),
+      onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: {"id": product.prodId}),
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.primary.withOpacity(0.05),
@@ -23,14 +28,17 @@ class ProductItem7 extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Expanded(
+            Expanded(
               child: Stack(
                 children: [
                   Center(
-                    child: CustomImage(
-                      image: AppImages.imgUnsplashSGyabqtoxk,
-                      fit: BoxFit.contain,
-                      width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
+                      child: CustomImage(
+                        image: product.imgUrl,
+                        fit: BoxFit.contain,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
                   PositionedDirectional(
@@ -52,7 +60,7 @@ class ProductItem7 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    AppStrings.msgNikeRunningShoes.tr,
+                    product.title,
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     autoSized: true,
@@ -63,7 +71,7 @@ class ProductItem7 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CustomText(
-                        "USD 400",
+                        "USD ${product.price}",
                         style: CustomTextStyles.labelLargeCairo,
                       ),
                       const Spacer(),
@@ -75,7 +83,7 @@ class ProductItem7 extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 3.h),
                         child: Text(
-                          "4.6",
+                          product.avgRatting.toStringAsFixed(1),
                           style: CustomTextStyles.bodySmallCairo,
                         ),
                       ),

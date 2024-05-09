@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/utils/json_utils.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:ecommerce/modules/product/models/responses/product_attribute_model.dart';
 import 'package:ecommerce/modules/product/models/responses/product_review_model.dart';
 
@@ -9,7 +10,7 @@ import 'return_policy_model.dart';
 class ProductDetailsModel {
   final Product product;
   final String productUrl;
-  final List<Product> relatedProducts;
+  final List<InListProductModel> relatedProducts;
   final dynamic userHasItem;
   final List<ProductReview> ratings;
   final int avgRating;
@@ -44,7 +45,10 @@ class ProductDetailsModel {
   factory ProductDetailsModel.fromJson(Map<String, dynamic> json) => ProductDetailsModel(
         product: Product.fromJson(json["product"] ?? {}),
         productUrl: JsonUtils.parseStringFromJson(json["product_url"]),
-        relatedProducts: List<Product>.from(json["related_products"].map((product) => Product.fromJson(product))),
+        relatedProducts: json["related_products"] == null
+            ? []
+            : List<InListProductModel>.from(
+                json["related_products"].map((product) => InListProductModel.fromJson(product))),
         userHasItem: json["user_has_item"],
         ratings: List<ProductReview>.from(json["ratings"].map((rating) => ProductReview.fromJson(rating))),
         avgRating: JsonUtils.parseIntFromJson(json["avg_rating"]),

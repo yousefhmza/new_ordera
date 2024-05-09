@@ -119,17 +119,29 @@ class Product {
         image: json["image"] ?? "",
         category: CategoryModel.fromJson(json["category"] ?? {}),
         subCategory: CategoryModel.fromJson(json["sub_category"] ?? {}),
-        childCategory: List<ChildCategory>.from(json["child_category"].map((cat) => ChildCategory.fromJson(cat))),
-        tag: List<Tag>.from(json["tag"].map((x) => Tag.fromJson(x))),
-        color: List<ProductAttribute>.from(json["color"].map((color) => ProductAttribute.fromJson(color))),
-        sizes: List<ProductAttribute>.from(json["sizes"].map((size) => ProductAttribute.fromJson(size))),
+        childCategory: json["child_category"] == null
+            ? []
+            : List<ChildCategory>.from(json["child_category"].map((cat) => ChildCategory.fromJson(cat))),
+        tag: json["tag"] == null ? [] : List<Tag>.from(json["tag"].map((x) => Tag.fromJson(x))),
+        color: json["color"] == null
+            ? []
+            : List<ProductAttribute>.from(json["color"].map((color) => ProductAttribute.fromJson(color))),
+        sizes: json["sizes"] == null
+            ? []
+            : List<ProductAttribute>.from(json["sizes"].map((size) => ProductAttribute.fromJson(size))),
         campaignProduct: json["campaign_product"],
-        inventoryDetail:
-            List<InventoryDetails>.from(json["inventory_detail"].map((detail) => InventoryDetails.fromJson(detail))),
-        reviews: List<ProductReview>.from(json["reviews"].map((review) => ProductReview.fromJson(review))),
+        inventoryDetail: json["inventory_detail"] == null
+            ? []
+            : List<InventoryDetails>.from(json["inventory_detail"].map((detail) => InventoryDetails.fromJson(detail))),
+        reviews: json["reviews"] == null
+            ? []
+            : List<ProductReview>.from(json["reviews"].map((review) => ProductReview.fromJson(review))),
         inventory: ProductInventory.fromJson(json["inventory"] ?? {}),
-        galleryImages: List<String>.from(json["gallery_images"].map((gImage) => gImage["image"])),
-        deliveryOption:
-            List<DeliveryOption>.from(json["delivery_option"].map((option) => DeliveryOption.fromJson(option))),
+        galleryImages: json["gallery_images"] == null
+            ? []
+            : List<String>.from(json["gallery_images"].map((gImage) => gImage["image"])),
+        deliveryOption: json["delivery_option"] == null
+            ? []
+            : List<DeliveryOption>.from(json["delivery_option"].map((option) => DeliveryOption.fromJson(option))),
       );
 }

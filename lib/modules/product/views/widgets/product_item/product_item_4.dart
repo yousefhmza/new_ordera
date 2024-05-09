@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,19 +7,23 @@ import '../../../../../config/navigation/navigation.dart';
 import '../../../../../config/theme/theme.dart';
 import '../../../../../core/resources/resources.dart';
 import '../../../../../core/view/views.dart';
+import '../../../models/responses/product_model.dart';
 
 class ProductItem4 extends StatelessWidget {
-  const ProductItem4({super.key});
+  final InListProductModel product;
+  final bool dynamicDimensions;
+
+  const ProductItem4(this.product, {this.dynamicDimensions = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.productDetailsScreen),
+        onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: {"id": product.prodId}),
         child: Container(
-          width: 300.h,
-          height: 110.v,
+          width: dynamicDimensions ? double.infinity : 300.h,
+          height: dynamicDimensions ? double.infinity : 110.v,
           margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.all(AppPadding.p8),
           decoration: BoxDecoration(
@@ -36,13 +41,9 @@ class ProductItem4 extends StatelessWidget {
             children: [
               AspectRatio(
                 aspectRatio: 1,
-                child: const CustomImage(
-                  image: AppImages.pizza,
-                  height: double.infinity,
-                  borderRadius: AppSize.s16,
-                ),
+                child: CustomImage(image: product.imgUrl, height: double.infinity, borderRadius: AppSize.s16),
               ),
-              HorizontalSpace(AppSize.s8),
+              const HorizontalSpace(AppSize.s8),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,10 +52,10 @@ class ProductItem4 extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(AppPadding.p4),
-                          decoration: BoxDecoration(color: AppColors.black),
+                          padding: const EdgeInsets.all(AppPadding.p4),
+                          decoration: const BoxDecoration(color: AppColors.black),
                           child: CustomText(
-                            "Spaghetti",
+                            product.categoryId.toString(),
                             textAlign: TextAlign.start,
                             maxLines: 1,
                             autoSized: true,
@@ -66,13 +67,13 @@ class ProductItem4 extends StatelessWidget {
                         ),
                         const Spacer(),
                         CustomText(
-                          "\$12.30",
+                          "\$${product.price}",
                           style: Get.theme.textTheme.titleMedium?.copyWith(fontSize: FontSize.s14.adaptSize),
                         )
                       ],
                     ),
                     CustomText(
-                      AppStrings.msgNikeRunningShoes.tr,
+                      product.title,
                       maxLines: 1,
                       autoSized: true,
                       style: Get.theme.textTheme.titleMedium?.copyWith(fontSize: FontSize.s14),

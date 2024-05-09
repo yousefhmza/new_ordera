@@ -83,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 OptionItem(
                   text: AppStrings.msgTermsConditions.tr,
-                  onTap: () {},
+                  onTap: () => Get.toNamed(Routes.termsAndConditionsScreen),
                 ),
                 OptionItem(
                   text: AppStrings.lblAboutUs.tr,

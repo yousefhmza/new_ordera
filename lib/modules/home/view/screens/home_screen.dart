@@ -3,8 +3,8 @@ import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/core/utils/globals.dart';
-import 'package:ecommerce/modules/home/view/components/home_most_common_component.dart';
-import 'package:ecommerce/modules/home/view/components/home_most_sale_component.dart';
+import 'package:ecommerce/modules/home/view/components/home_recent_component.dart';
+import 'package:ecommerce/modules/home/view/components/home_featured_component.dart';
 import 'package:ecommerce/modules/home/view/components/home_offer_component.dart';
 import 'package:get/get.dart';
 
@@ -61,8 +61,8 @@ class HomeScreen extends GetWidget<HomeController> {
                 const HomeCategoriesComponent(),
                 SizedBox(height: 28.v),
                 const HomeOfferComponent(),
-                const HomeMostSaleComponent(),
-                const HomeMostCommonComponent(),
+                const HomeRecentComponent(),
+                const HomeFeaturedComponent(),
                 SizedBox(height: 17.v),
               ],
             ),

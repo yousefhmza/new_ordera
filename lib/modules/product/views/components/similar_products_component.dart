@@ -1,11 +1,12 @@
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/core/view/views.dart';
+import 'package:ecommerce/modules/product/controller/product_detail_controller.dart';
 import 'package:ecommerce/modules/product/views/widgets/similar_product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SimilarProductsComponent extends StatelessWidget {
+class SimilarProductsComponent extends GetWidget<ProductDetailsController> {
   const SimilarProductsComponent({super.key});
 
   @override
@@ -44,9 +45,9 @@ class SimilarProductsComponent extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-              itemBuilder: (context, index) => SimilarProductItem(),
+              itemBuilder: (context, index) => SimilarProductItem(controller.product.value!.relatedProducts[index]),
               separatorBuilder: (context, index) => const HorizontalSpace(AppSize.s12),
-              itemCount: 7,
+              itemCount: controller.product.value!.relatedProducts.length,
             ),
           )
         ],

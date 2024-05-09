@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
 import 'package:ecommerce/modules/search/view/widgets/recent_search_chip.dart';
 import '../../../../core/view/views.dart';
 // import '../../../categories/view/widgets/category_item.dart';
@@ -34,7 +35,7 @@ class SearchInitialComponent extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     separatorBuilder: (context, index) => const HorizontalSpace(AppSize.s8),
                     itemCount: 5,
-                    itemBuilder: (context, index) => CategoryItem(),
+                    itemBuilder: (context, index) => CategoryItem(CategoryModel.fromJson({})),
                   ),
                 ),
               ),

@@ -7,7 +7,7 @@ import '../../resources/resources.dart';
 import '../local/cache_client.dart';
 import '../local/storage_keys.dart';
 
-const String _baseURL = "http://hexfashion.xyz/api/tenant/v1";
+const String _baseURL = "https://hexfashion.xyz/api/tenant/v1";
 const String _contentType = "Content-Type";
 const String _accept = "accept";
 const String _applicationJson = "application/json";
@@ -43,6 +43,7 @@ class ApiClient {
   Future<Response> get({
     required String url,
     Map<String, dynamic>? queryParameters,
+    bool useToken = true,
   }) async {
     final String? token = await _cacheClient.get(StorageKeys.token);
     return await _dio.get(
@@ -50,7 +51,7 @@ class ApiClient {
       queryParameters: queryParameters,
       options: Options(
         headers: {
-          if (token != null) _authorization: "Bearer $token",
+          if (token != null && useToken) _authorization: "Bearer $token",
         },
       ),
     );

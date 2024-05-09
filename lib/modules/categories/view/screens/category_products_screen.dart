@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/utils/globals.dart';
+import '../../../product/models/responses/in_list_product_model.dart';
 
 class CategoryProductsScreen extends StatelessWidget {
   const CategoryProductsScreen({super.key});
@@ -25,6 +26,7 @@ class CategoryProductsScreen extends StatelessWidget {
           itemCount: 4,
           itemBuilder: (context, index) => settings.getProductItem(
             // product: controller.categoryProducts[index],
+            product: InListProductModel.fromJson({}),
             dynamicDimensions: true,
           ),
         ),

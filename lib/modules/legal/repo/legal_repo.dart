@@ -5,7 +5,7 @@ import 'package:ecommerce/core/services/error/failure.dart';
 import 'package:ecommerce/core/services/network/api_client.dart';
 import 'package:ecommerce/core/services/network/endpoints.dart';
 import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
-import 'package:ecommerce/modules/product/models/responses/in_list_rpduct_model.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 
 class LegalRepo extends BaseRepository {
   final ApiClient _apiClient;

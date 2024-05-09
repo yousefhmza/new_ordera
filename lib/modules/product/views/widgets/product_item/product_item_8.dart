@@ -1,24 +1,27 @@
 import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../config/theme/theme.dart';
 import '../../../../../core/view/views.dart';
 
 class ProductItem8 extends StatelessWidget {
-  const ProductItem8({super.key});
+  final InListProductModel product;
+  final bool dynamicDimensions;
+
+  const ProductItem8(this.product, {this.dynamicDimensions = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.productDetailsScreen),
+        onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: {"id": product.prodId}),
         child: Container(
-          width: 190.h,
-          height: 250.v,
+          width: dynamicDimensions ? double.infinity : 190.h,
+          height: dynamicDimensions ? double.infinity : 250.v,
           margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -36,9 +39,9 @@ class ProductItem8 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Expanded(
+              Expanded(
                 child: CustomImage(
-                  image: AppImages.sushi,
+                  image: product.imgUrl,
                   width: double.infinity,
                   height: double.infinity,
                   borderRadius: AppSize.s14,
@@ -49,19 +52,19 @@ class ProductItem8 extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CustomText(
-                      "SUSHI",
+                      product.title,
                       maxLines: 1,
                       autoSized: true,
                       style:
                           Get.theme.textTheme.titleMedium?.copyWith(color: AppColors.primary, fontSize: FontSize.s14),
                     ),
                   ),
-                  CustomText("\$12.30", style: Get.theme.textTheme.titleMedium),
+                  CustomText("\$${product.price}", style: Get.theme.textTheme.titleMedium),
                 ],
               ),
               VerticalSpace(AppSize.s4.v),
               CustomText(
-                "This text is replacaple",
+                product.vendorName,
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 autoSized: true,

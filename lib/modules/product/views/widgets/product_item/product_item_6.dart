@@ -1,24 +1,27 @@
 import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../config/theme/theme.dart';
 import '../../../../../core/view/views.dart';
 
 class ProductItem6 extends StatelessWidget {
-  const ProductItem6({super.key});
+  final InListProductModel product;
+  final bool dynamicDimensions;
+
+  const ProductItem6(this.product, {this.dynamicDimensions = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.productDetailsScreen),
+        onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: {"id": product.prodId}),
         child: Container(
-          width: 210.h,
-          height: 240.v,
+          width: dynamicDimensions ? double.infinity : 210.h,
+          height: dynamicDimensions ? double.infinity : 240.v,
           margin: const EdgeInsets.only(top: 8),
           clipBehavior: Clip.antiAlias,
           foregroundDecoration: BoxDecoration(borderRadius: BorderRadius.circular(AppSize.s14)),
@@ -41,11 +44,7 @@ class ProductItem6 extends StatelessWidget {
                 child: Stack(
                   alignment: AlignmentDirectional.topEnd,
                   children: [
-                    const CustomImage(
-                      image: AppImages.pizza,
-                      width: double.infinity,
-                      height: double.infinity,
-                    ),
+                    CustomImage(image: product.imgUrl, width: double.infinity, height: double.infinity),
                     Container(
                       margin: const EdgeInsets.all(AppPadding.p12),
                       padding: const EdgeInsets.all(AppPadding.p6),
@@ -72,22 +71,21 @@ class ProductItem6 extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CustomText(
-                            "Pizza",
+                            product.title,
                             maxLines: 1,
                             autoSized: true,
                             style: Get.theme.textTheme.titleMedium
                                 ?.copyWith(color: AppColors.black, fontSize: FontSize.s14.adaptSize),
                           ),
                         ),
-                       const  HorizontalSpace(AppSize.s8),
+                        const HorizontalSpace(AppSize.s8),
                         CustomText(
-                          "\$12.30",
+                          "\$${product.price}",
                           style: Get.theme.textTheme.titleMedium?.copyWith(fontSize: FontSize.s18.adaptSize),
                         ),
                       ],
                     ),
-                    VerticalSpace(AppSize.s4.v),
-                    VerticalSpace(AppSize.s6.v),
+                    VerticalSpace(AppSize.s10.v),
                     CustomButton(
                       padding: const EdgeInsets.all(AppPadding.p6),
                       text: AppStrings.lblAddToCart.tr,

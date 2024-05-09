@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:ecommerce/modules/product/models/responses/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,17 +28,16 @@ import '../../modules/home/view/components/home_appbar/home_appbar_8.dart';
 import '../../modules/home/view/components/home_appbar/home_appbar_9.dart';
 import '../../modules/home/view/components/home_appbar/home_appbar_10.dart';
 
-import '../../modules/home/view/widgets/product_item/product_item_10.dart';
-import '../../modules/home/view/widgets/product_item/product_item_1.dart';
-import '../../modules/home/view/widgets/product_item/product_item_2.dart';
-import '../../modules/home/view/widgets/product_item/product_item_3.dart';
-import '../../modules/home/view/widgets/product_item/product_item_4.dart';
-import '../../modules/home/view/widgets/product_item/product_item_5.dart';
-import '../../modules/home/view/widgets/product_item/product_item_6.dart';
-import '../../modules/home/view/widgets/product_item/product_item_7.dart';
-import '../../modules/home/view/widgets/product_item/product_item_8.dart';
-import '../../modules/home/view/widgets/product_item/product_item_9.dart';
-import '../../modules/home/view/widgets/product_item/product_item_10.dart';
+import '../../modules/product/views/widgets/product_item/product_item_10.dart';
+import '../../modules/product/views/widgets/product_item/product_item_1.dart';
+import '../../modules/product/views/widgets/product_item/product_item_2.dart';
+import '../../modules/product/views/widgets/product_item/product_item_3.dart';
+import '../../modules/product/views/widgets/product_item/product_item_4.dart';
+import '../../modules/product/views/widgets/product_item/product_item_5.dart';
+import '../../modules/product/views/widgets/product_item/product_item_6.dart';
+import '../../modules/product/views/widgets/product_item/product_item_7.dart';
+import '../../modules/product/views/widgets/product_item/product_item_8.dart';
+import '../../modules/product/views/widgets/product_item/product_item_9.dart';
 import 'constants.dart';
 
 Rx<UserModel?> currentUser = Rx(null);
@@ -171,28 +171,28 @@ class Settings {
     }
   }
 
-  Widget getProductItem({ Product? product, bool dynamicDimensions = false}) {
+  Widget getProductItem({required InListProductModel product, bool dynamicDimensions = false}) {
     switch (productItem) {
       case 1:
-        return ProductItem1();
+        return ProductItem1(product, dynamicDimensions: dynamicDimensions);
       case 2:
-        return ProductItem2();
+        return ProductItem2(product, dynamicDimensions: dynamicDimensions);
       case 3:
-        return ProductItem3();
+        return ProductItem3(product, dynamicDimensions: dynamicDimensions);
       case 4:
-        return ProductItem4();
+        return ProductItem4(product, dynamicDimensions: dynamicDimensions);
       case 5:
-        return ProductItem5();
+        return ProductItem5(product, dynamicDimensions: dynamicDimensions);
       case 6:
-        return ProductItem6();
+        return ProductItem6(product, dynamicDimensions: dynamicDimensions);
       case 7:
-        return ProductItem7();
+        return ProductItem7(product, dynamicDimensions: dynamicDimensions);
       case 8:
-        return ProductItem8();
+        return ProductItem8(product, dynamicDimensions: dynamicDimensions);
       case 9:
-        return ProductItem9();
+        return ProductItem9(product, dynamicDimensions: dynamicDimensions);
       case 10:
-        return ProductItem10();
+        return ProductItem10(product, dynamicDimensions: dynamicDimensions);
       default:
         return Container();
     }
@@ -210,8 +210,8 @@ class Settings {
         categoryChipsListViewHeight = 32.v;
         categoryChipsSpacing = 24.h;
         break;
-    // categoryChipsListViewHeight = 48.v;
-    // break;
+      // categoryChipsListViewHeight = 48.v;
+      // break;
       case 4:
         categoryChipsListViewHeight = 32.v;
         categoryChipsSpacing = 20.h;
@@ -235,21 +235,21 @@ class Settings {
         categoryChipsListViewHeight = 40.v;
         categoryChipsSpacing = 20.h;
         break;
-    // categoryChipsListViewHeight = 40.v;
-    // break;
+      // categoryChipsListViewHeight = 40.v;
+      // break;
       case 10:
         categoryChipsListViewHeight = 24.v;
         categoryChipsSpacing = 24.h;
         break;
-    // categoryChipsListViewHeight = 40.v;
-    // break;
+      // categoryChipsListViewHeight = 40.v;
+      // break;
     }
   }
 
-  Widget getCategoryChip({ CategoryModel? category, required bool isSelected, required VoidCallback onTap}) {
+  Widget getCategoryChip({CategoryModel? category, required bool isSelected, required VoidCallback onTap}) {
     switch (categoryChip) {
       case 1:
-        return CategoryChip1( isSelected: isSelected, onTap: onTap);
+        return CategoryChip1(isSelected: isSelected, onTap: onTap);
       case 2:
         return CategoryChip2(isSelected: isSelected, onTap: onTap);
       case 3:

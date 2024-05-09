@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/view/views.dart';
+import '../../controller/product_detail_controller.dart';
 
-class ProductImagesSlider extends StatelessWidget {
+class ProductImagesSlider extends GetWidget<ProductDetailsController> {
   const ProductImagesSlider({super.key});
 
   @override
@@ -23,22 +24,19 @@ class ProductImagesSlider extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s10),
           ),
           child: CustomImage(
-            // image: controller.product.value!.images.isEmpty
-            image: true
+            image: controller.product.value!.product.galleryImages.isEmpty
                 ? AppImages.imgPlaceholder
-                : "controller.product.value!.images[index].src",
+                : controller.product.value!.product.galleryImages[index],
             width: double.infinity,
             height: double.infinity,
-            // fit: controller.product.value!.images.isEmpty
-            fit: true
-                ? BoxFit.cover : BoxFit.contain,
+            fit: controller.product.value!.product.galleryImages.isEmpty ? BoxFit.cover : BoxFit.contain,
             borderRadius: AppSize.s10,
           ),
         ),
         separatorBuilder: (context, index) => const HorizontalSpace(AppSize.s12),
-        // itemCount: controller.product.value!.images.isEmpty
-        itemCount: true
-            ? 1 : 0,
+        itemCount: controller.product.value!.product.galleryImages.isEmpty
+            ? 1
+            : controller.product.value!.product.galleryImages.length,
       ),
     );
   }

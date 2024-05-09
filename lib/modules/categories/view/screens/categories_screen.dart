@@ -3,6 +3,7 @@ import 'package:ecommerce/core/utils/globals.dart';
 import 'package:ecommerce/core/view/views.dart';
 import 'package:ecommerce/modules/categories/controller/categories_controller.dart';
 import 'package:ecommerce/modules/categories/view/components/categories_appbar.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class CategoriesScreen extends GetWidget<CategoriesController> {
             itemCount: 3,
             itemBuilder: (context, index) => settings.getProductItem(
               // product: controller.categoryProducts[index],
+              product: InListProductModel.fromJson({}),
               dynamicDimensions: true,
             ),
           ),

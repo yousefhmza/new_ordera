@@ -1,24 +1,28 @@
 import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../config/theme/theme.dart';
 import '../../../../../core/view/views.dart';
+import '../../../models/responses/product_model.dart';
 
 class ProductItem5 extends StatelessWidget {
-  const ProductItem5({super.key});
+  final InListProductModel product;
+  final bool dynamicDimensions;
+
+  const ProductItem5(this.product, {this.dynamicDimensions = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: AlignmentDirectional.topCenter,
       child: GestureDetector(
-        onTap: () => Get.toNamed(Routes.productDetailsScreen),
+        onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: {"id": product.prodId}),
         child: Container(
-          width: 190.h,
-          height: 250.v,
+          width:dynamicDimensions ? double.infinity :  190.h,
+          height:dynamicDimensions ? double.infinity :  250.v,
           margin: const EdgeInsets.only(top: 8),
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
@@ -39,8 +43,8 @@ class ProductItem5 extends StatelessWidget {
               Expanded(
                 child: Stack(
                   children: [
-                    const CustomImage(
-                      image: AppImages.sushi,
+                    CustomImage(
+                      image: product.imgUrl,
                       width: double.infinity,
                       height: double.infinity,
                       borderRadius: AppSize.s14,
@@ -66,14 +70,14 @@ class ProductItem5 extends StatelessWidget {
               ),
               VerticalSpace(AppSize.s8.v),
               CustomText(
-                AppStrings.msgNikeRunningShoes.tr,
+                product.title,
                 maxLines: 1,
                 autoSized: true,
                 style: Get.theme.textTheme.titleMedium?.copyWith(color: AppColors.primary, fontSize: FontSize.s14),
               ),
               VerticalSpace(AppSize.s4.v),
               CustomText(
-                "This text is replacaple",
+                product.vendorName,
                 textAlign: TextAlign.start,
                 maxLines: 1,
                 autoSized: true,
@@ -83,7 +87,7 @@ class ProductItem5 extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: CustomText("\$12.30", style: Get.theme.textTheme.titleMedium),
+                    child: CustomText("\$${product.price}", style: Get.theme.textTheme.titleMedium),
                   ),
                   Container(
                     padding: const EdgeInsets.all(AppPadding.p6),

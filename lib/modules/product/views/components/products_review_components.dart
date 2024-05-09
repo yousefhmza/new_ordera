@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 
 import '../../../../core/resources/resources.dart';
 import '../../../../core/view/views.dart';
+import '../../controller/product_detail_controller.dart';
 import '../widgets/review_item.dart';
 
-class ProductReviewsComponent extends StatelessWidget {
+class ProductReviewsComponent extends GetWidget<ProductDetailsController> {
   const ProductReviewsComponent({super.key});
 
   @override
@@ -18,7 +19,7 @@ class ProductReviewsComponent extends StatelessWidget {
           Row(
             children: [
               CustomText(
-                "${AppStrings.lblReviews102.tr} (134)",
+                "${AppStrings.lblReviews102.tr} (${controller.product.value!.product.reviewsCount})",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   fontSize: FontSize.s16,
                   fontWeight: FontWeightManager.regular,

@@ -5,7 +5,7 @@ import 'package:ecommerce/core/services/error/failure.dart';
 import 'package:ecommerce/core/services/network/api_client.dart';
 import 'package:ecommerce/core/services/network/endpoints.dart';
 import 'package:ecommerce/modules/home/models/responses/slider_item_model.dart';
-import 'package:ecommerce/modules/product/models/responses/in_list_rpduct_model.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 
 class HomeRepo extends BaseRepository {
   final ApiClient _apiClient;
@@ -39,7 +39,7 @@ class HomeRepo extends BaseRepository {
         queryParameters: {"page": page},
       ),
       successReturn: (data) => PaginationModel.fromJson(
-        data,
+        data["meta"],
         List<InListProductModel>.from(data["data"].map((product) => InListProductModel.fromJson(product))),
       ),
     );

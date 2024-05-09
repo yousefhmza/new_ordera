@@ -13,7 +13,7 @@ class ProductsRepo extends BaseRepository {
 
   Future<Either<Failure, ProductDetailsModel>> getProductById(int id) {
     return super.call<ProductDetailsModel>(
-      httpRequest: () => _apiClient.get(url: '${EndPoints.productDetails}/$id'),
+      httpRequest: () => _apiClient.get(url: '${EndPoints.productDetails}/$id', useToken: false),
       successReturn: (data) => ProductDetailsModel.fromJson(data),
     );
   }

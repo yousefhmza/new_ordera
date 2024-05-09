@@ -1,13 +1,15 @@
-import 'package:ecommerce/core/resources/app_values.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
-import 'package:ecommerce/core/utils/constants.dart';
 import 'package:ecommerce/core/view/views.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class SimilarProductItem extends StatelessWidget {
-  const SimilarProductItem({super.key});
+  final InListProductModel product;
+
+  const SimilarProductItem(this.product, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +24,16 @@ class SimilarProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Center(child: CustomImage(image: Constants.headphone, fit: BoxFit.contain)),
-          ),
+          Expanded(child: Center(child: CustomImage(image: product.imgUrl, fit: BoxFit.contain))),
           const VerticalSpace(AppSize.s20),
-          CustomText("TMA-2 HD Wireless"),
+          CustomText(product.title),
           const VerticalSpace(AppSize.s4),
           CustomText(
-            "${AppStrings.usd.tr} 400",
+            "${AppStrings.usd.tr} ${product.discountPrice.toStringAsFixed(1)}",
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeightManager.bold,
-              fontSize: FontSize.s12,
-            ),
+                  fontWeight: FontWeightManager.bold,
+                  fontSize: FontSize.s12,
+                ),
           ),
         ],
       ),

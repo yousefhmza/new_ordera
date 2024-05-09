@@ -1,3 +1,4 @@
+import 'package:ecommerce/modules/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../di_container.dart';
@@ -9,5 +10,6 @@ class LayoutBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => sl<LayoutController>());
     Get.lazyPut(() => sl<CategoriesController>());
+    Get.lazyPut(() => sl<HomeController>());
   }
 }

@@ -18,8 +18,8 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
 
   Future<void> login() async {
-    isLoading(true);
     if (!formKey.currentState!.validate()) return;
+    isLoading(true);
     final result = await _authRepo.login(loginBody);
     result.fold(
       (failure) => Alerts.showSnackBar(message: failure.message),

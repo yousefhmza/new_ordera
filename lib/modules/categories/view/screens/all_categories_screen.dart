@@ -1,5 +1,6 @@
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/view/views.dart';
+import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class AllCategoriesScreen extends StatelessWidget {
       appBar: MainAppbar(title: AppStrings.lblCategories.tr),
       body: GridView.builder(
         padding: const EdgeInsets.all(AppPadding.p16),
-        itemBuilder: (context, index) => CategoryItem(),
+        itemBuilder: (context, index) => CategoryItem(CategoryModel.fromJson({})),
         // itemCount: controller.categories.length,
         itemCount: 4,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

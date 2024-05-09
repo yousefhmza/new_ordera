@@ -1,4 +1,5 @@
 import 'package:ecommerce/core/view/views.dart';
+import 'package:ecommerce/modules/product/models/responses/in_list_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../core/resources/resources.dart';
@@ -18,9 +19,9 @@ class SearchedProductsComponent extends StatelessWidget {
             child: CustomText(
               AppStrings.lblSearchResults.tr,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeightManager.bold,
-                fontSize: FontSize.s16,
-              ),
+                    fontWeight: FontWeightManager.bold,
+                    fontSize: FontSize.s16,
+                  ),
             ),
           ),
         ),
@@ -37,6 +38,7 @@ class SearchedProductsComponent extends StatelessWidget {
             itemCount: 4,
             itemBuilder: (context, index) => settings.getProductItem(
               // product: controller.products.value![index],
+              product: InListProductModel.fromJson({}),
               dynamicDimensions: true,
             ),
           ),

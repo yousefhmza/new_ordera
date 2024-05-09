@@ -12,32 +12,35 @@ class HomeCategoriesComponent extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.h),
-          child: RowWithTitle(
-            title: "lbl_categories".tr,
-            viewAllText: "lbl_view_all".tr,
-            onTap: () => Get.toNamed(Routes.allCategoriesScreen),
-          ),
-        ),
-        SizedBox(height: 11.v),
-        Align(
-          alignment: Alignment.centerRight,
-          child: SizedBox(
-            height: 104.v,
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 24.h),
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (context, index) => SizedBox(width: 8.h),
-              // itemCount: controller.categories.length,
-              itemCount: 3,
-              itemBuilder: (context, index) => CategoryItem(),
+    return Obx(
+          () => controller.categories.isEmpty
+          ? const SizedBox.shrink()
+          : Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.h),
+            child: RowWithTitle(
+              title: "lbl_categories".tr,
+              viewAllText: "lbl_view_all".tr,
+              onTap: () => Get.toNamed(Routes.allCategoriesScreen),
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 11.v),
+          Align(
+            alignment: Alignment.centerRight,
+            child: SizedBox(
+              height: 104.v,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 24.h),
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index) => SizedBox(width: 8.h),
+                itemCount: controller.categories.length,
+                itemBuilder: (context, index) => CategoryItem(controller.categories[index]),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
