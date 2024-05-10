@@ -1,3 +1,5 @@
+import 'package:ecommerce/core/extensions/color_extension.dart';
+import 'package:ecommerce/core/extensions/non_null_extensions.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,9 +7,13 @@ import 'package:get/get.dart';
 import '../../../../config/theme/theme.dart';
 import '../../../../core/resources/resources.dart';
 import '../../../../core/view/views.dart';
+import '../../controller/shopping_cart_controller.dart';
+import '../../models/requests/cart_product_model.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+class CartItem extends GetWidget<CartController> {
+  final CartProduct product;
+
+  const CartItem(this.product, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,117 +32,91 @@ class CartItem extends StatelessWidget {
               borderRadius: BorderRadiusStyle.roundedBorder10,
             ),
             child: CustomImage(
-              image: AppImages.imgImage584x84,
-              height: 84.adaptSize,
-              width: 84.adaptSize,
+              image: product.thumbnail.orEmpty,
+              height: AppSize.s100.adaptSize,
+              width: AppSize.s100.adaptSize,
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 1.v),
-                    child: Text(
-                      "Headphone TMA - 2",
-                      style: Get.theme.textTheme.bodyLarge,
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0.8,
-                    child: CustomImage(
-                      image: AppImages.imgIconTrash2,
-                      height: 20.adaptSize,
-                      width: 20.adaptSize,
-                      margin: EdgeInsets.only(left: 30.h),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 3.v),
-              Text(
-                "USD 456",
-                style: CustomTextStyles.titleSmallPrimary,
-              ),
-              SizedBox(height: 11.v),
-              Row(
-                children: [
-                  Text(
-                    AppStrings.lblColor.tr,
-                    style: Get.theme.textTheme.bodySmall,
-                  ),
-                  Container(
-                    height: 13.adaptSize,
-                    width: 13.adaptSize,
-                    margin: EdgeInsets.only(left: 8.h),
-                    decoration: BoxDecoration(
-                      color: AppColors.black,
-                      borderRadius: BorderRadius.circular(6.h),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 3.v),
-              SizedBox(
-                width: 207.h,
-                child: Row(
+          const HorizontalSpace(AppSize.s16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12.v),
+                    Expanded(
                       child: Text(
-                        AppStrings.lblSeller.tr,
-                        style: Get.theme.textTheme.bodySmall,
-                      ),
-                    ),
-                    CustomImage(
-                      image: AppImages.imgSimpleIconsSony,
-                      height: 40.adaptSize,
-                      width: 40.adaptSize,
-                      margin: EdgeInsets.only(left: 8.h),
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.v),
-                      child: CustomIconButton(
-                        height: 24.adaptSize,
-                        width: 24.adaptSize,
-                        padding: EdgeInsets.all(2.h),
-                        child: CustomImage(
-                          image: AppImages.imgIconMinus,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 16.h,
-                        top: 8.v,
-                        bottom: 10.v,
-                      ),
-                      child: Text(
-                        "1",
+                        product.title.orEmpty,
                         style: Get.theme.textTheme.bodyLarge,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 17.h,
-                        top: 8.v,
-                        bottom: 8.v,
-                      ),
-                      child: CustomIconButton(
-                        height: 24.adaptSize,
-                        width: 24.adaptSize,
-                        padding: EdgeInsets.all(2.h),
-                        child: CustomImage(
-                          image: AppImages.imgIconPlus,
+                    InkWell(
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => ConfirmationDialog(
+                          title: AppStrings.msgSureRemoveFromCart.tr,
+                          onYes: () =>
+                              controller.deleteProduct(product.productId.orZero, product.attributesHash.orEmpty),
                         ),
+                      ),
+                      child: CustomImage(
+                        image: AppImages.imgIconTrash2,
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        margin: EdgeInsets.only(left: 30.h),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 3.v),
+                Text(
+                  "${AppStrings.usd.tr} ${product.priceWithAttr ?? product.discountPrice}",
+                  style: CustomTextStyles.titleSmallPrimary,
+                ),
+                SizedBox(height: 7.v),
+                Row(
+                  children: [
+                    Text(
+                      AppStrings.lblColor.tr,
+                      style: Get.theme.textTheme.bodySmall,
+                    ),
+                    if (product.color != null)
+                      Container(
+                        height: 13.adaptSize,
+                        width: 13.adaptSize,
+                        margin: EdgeInsets.only(left: 8.h),
+                        decoration: BoxDecoration(
+                          color: HexColor.fromHex(product.color!),
+                          borderRadius: BorderRadius.circular(6.h),
+                        ),
+                      ),
+                  ],
+                ),
+                SizedBox(height: 3.v),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomIconButton(
+                      height: 24.adaptSize,
+                      width: 24.adaptSize,
+                      padding: EdgeInsets.all(2.h),
+                      onTap: () => controller.decreaseQuantity(product.productId!, product.attributesHash.orEmpty),
+                      child: CustomImage(image: AppImages.imgIconMinus),
+                    ),
+                    const HorizontalSpace(AppSize.s16),
+                    Text(product.qty.toString(), style: Get.theme.textTheme.bodyLarge),
+                    const HorizontalSpace(AppSize.s16),
+                    CustomIconButton(
+                      height: 24.adaptSize,
+                      width: 24.adaptSize,
+                      padding: EdgeInsets.all(2.h),
+                      onTap: () => controller.increaseQuantity(product.productId!, product.attributesHash.orEmpty),
+                      child: CustomImage(image: AppImages.imgIconPlus),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),

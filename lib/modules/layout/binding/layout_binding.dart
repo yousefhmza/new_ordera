@@ -1,3 +1,4 @@
+import 'package:ecommerce/modules/cart/controller/shopping_cart_controller.dart';
 import 'package:ecommerce/modules/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 
@@ -11,5 +12,6 @@ class LayoutBinding extends Bindings {
     Get.lazyPut(() => sl<LayoutController>());
     Get.lazyPut(() => sl<CategoriesController>());
     Get.lazyPut(() => sl<HomeController>());
+    Get.lazyPut(() => sl<CartController>());
   }
 }

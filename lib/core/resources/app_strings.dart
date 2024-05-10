@@ -310,4 +310,5 @@ class AppStrings {
   static const String confirm = "confirm";
   static const String fetchAddressError = "fetchAddressError";
   static const String pickHere = "pickHere";
+  static const String pleaseChooseAttribute = "pleaseChooseAttribute";
 }

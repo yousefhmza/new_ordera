@@ -20,5 +20,6 @@ class StorageKeys {
   static const String childCategory = "childCategory";
   static const String attributes = "attributes";
   static const String variantId = "variantId";
+  static const String attributesHash = "attributesHash";
   static const String taxOptionsSumRate = "tax_options_sum_rate";
 }

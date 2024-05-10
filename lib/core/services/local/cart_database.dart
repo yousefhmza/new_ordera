@@ -38,6 +38,7 @@ class CartDatabase {
     ${StorageKeys.childCategory} INTEGER,
     ${StorageKeys.attributes} TEXT,
     ${StorageKeys.variantId} INTEGER,
+    ${StorageKeys.attributesHash} TEXT,
     ${StorageKeys.taxOptionsSumRate} TEXT
     )   
     ''');
@@ -63,18 +64,27 @@ class CartDatabase {
     return await db.update(
       StorageKeys.cartProductsTable,
       cartProduct.toJson(),
-      where: '${StorageKeys.productId} = ?',
-      whereArgs: [cartProduct.productId],
+      where: '${StorageKeys.productId} = ? and ${StorageKeys.attributesHash} = ?',
+      whereArgs: [cartProduct.productId, cartProduct.attributesHash],
     );
   }
 
-  Future<int> deleteData(int productId) async {
+  Future<void> removeFromCart(int productId, String attributesHash) async {
     Database db = await database;
-    return await db.delete(
+    await db.delete(
       StorageKeys.cartProductsTable,
-      where: '${StorageKeys.productId} = ?',
-      whereArgs: [productId],
+      where: '${StorageKeys.productId} = ? and ${StorageKeys.attributesHash} = ?',
+      whereArgs: [productId, attributesHash],
     );
+  }
+
+  Future<bool> checkIfAddedToCart(int productId, String attributesHash) async {
+    Database db = await database;
+    List<Map<String, dynamic>> data = await db.rawQuery(
+      "SELECT * FROM ${StorageKeys.cartProductsTable} WHERE ${StorageKeys.attributesHash} = ? and ${StorageKeys.productId} = ?",
+      [attributesHash, productId],
+    );
+    return data.isNotEmpty;
   }
 
   Future<int> deleteAllRows() async {
@@ -82,7 +92,6 @@ class CartDatabase {
     return await db.delete(StorageKeys.cartProductsTable);
   }
 }
-
 
 // ignore_for_file: avoid_print, use_build_context_synchronously
 //

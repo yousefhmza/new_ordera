@@ -39,9 +39,18 @@ class CartRepo {
     }
   }
 
-  Future<Either<Failure, String>> deleteCartProduct(int productId) async {
+  Future<Either<Failure, bool>> checkIfAddedToCart(int productId, String attributesHash) async {
     try {
-      await _cartDatabase.deleteData(productId);
+      final bool isAdded = await _cartDatabase.checkIfAddedToCart(productId, attributesHash);
+      return Right(isAdded);
+    } on Exception catch (e) {
+      return Left(ErrorHandler.handle(e).failure);
+    }
+  }
+
+  Future<Either<Failure, String>> deleteCartProduct(int productId, String attributesHash) async {
+    try {
+      await _cartDatabase.removeFromCart(productId, attributesHash);
       return const Right("");
     } on Exception catch (e) {
       return Left(ErrorHandler.handle(e).failure);

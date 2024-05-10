@@ -34,6 +34,7 @@ class ProductDetailsController extends GetxController {
       (product) {
         this.product(product);
         cartProduct.copyWith(
+          thumbnail: product.product.image,
           productId: product.product.id,
           category: product.product.category.id,
           subcategory: product.product.subCategory.id,
@@ -61,5 +62,29 @@ class ProductDetailsController extends GetxController {
       },
     );
     isAddingReview(false);
+  }
+
+  Future<bool?> checkIfAddedToCart(int productId, String attributesHash) async {
+    final result = await _cartRepo.checkIfAddedToCart(productId, attributesHash);
+    return result.fold(
+      (failure) {
+        Alerts.showSnackBar(message: failure.message);
+        return null;
+      },
+      (isAdded) => isAdded,
+    );
+  }
+
+  Future<void> addProductToCart() async {
+    final isAdded = await checkIfAddedToCart(cartProduct.productId!, cartProduct.attributesHash ?? "");
+    if (isAdded == null || isAdded) {
+      Alerts.showToast(AppStrings.msgProductAlreadyInCart.tr);
+      return;
+    }
+    final result = await _cartRepo.addToCart(cartProduct);
+    result.fold(
+      (failure) => Alerts.showSnackBar(message: failure.message),
+      (message) => Alerts.showToast(message),
+    );
   }
 }

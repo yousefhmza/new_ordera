@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/utils/alerts.dart';
 import 'package:ecommerce/modules/product/views/components/product_attributes_component.dart';
 import 'package:ecommerce/modules/product/views/components/similar_products_component.dart';
 import 'package:flutter/material.dart';
@@ -65,15 +66,12 @@ class ProductDetailsScreen extends GetWidget<ProductDetailsController> {
                   height: AppSize.s40,
                   text: AppStrings.lblAddToCart.tr,
                   onPressed: () {
-                    // final CartProduct cartProduct = CartProduct(
-                    //   id: 0,
-                    //   productId: controller.product.value!.id,
-                    //   image: controller.product.value!.images.isEmpty ? "" : controller.product.value!.images[0].src,
-                    //   name: controller.product.value!.name,
-                    //   price: controller.product.value!.price,
-                    //   quantity: 1,
-                    // );
-                    // cartController.addProduct(cartProduct);
+                    if (controller.product.value!.product.inventoryDetail.isNotEmpty &&
+                        controller.cartProduct.variantId == null) {
+                      Alerts.showToast(AppStrings.pleaseChooseAttribute.tr);
+                      return;
+                    }
+                    controller.addProductToCart();
                   },
                 ),
               ),

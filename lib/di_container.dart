@@ -91,7 +91,7 @@ Future<void> init() async {
   sl.registerFactory<ChooseOnMapController>(() => ChooseOnMapController());
   sl.registerFactory<HomeController>(() => HomeController(sl<HomeRepo>(), sl<CategoriesRepo>()));
   sl.registerFactory<ProductDetailsController>(() => ProductDetailsController(sl<ProductsRepo>(), sl<CartRepo>()));
-  sl.registerFactory<CartController>(() => CartController());
+  sl.registerFactory<CartController>(() => CartController(sl<CartRepo>()));
   sl.registerFactory<CategoriesController>(() => CategoriesController(sl<CategoriesRepo>()));
   sl.registerFactory<OrderController>(() => OrderController());
   sl.registerFactory<TermsAndConditionsController>(() => TermsAndConditionsController(sl<LegalRepo>()));

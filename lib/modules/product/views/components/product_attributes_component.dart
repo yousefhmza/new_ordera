@@ -56,6 +56,7 @@ class ProductAttributesComponent extends GetWidget<ProductDetailsController> {
                             priceWithAttr: product.salePrice + product.inventoryDetail[index].additionalPrice,
                             color: product.inventoryDetail[index].productColor.colorCode,
                             size: product.inventoryDetail[index].productColor.sizeCode,
+                            attributesHash: selectedInventoryHash,
                             attributes: attributeIndex == -1
                                 ? {}
                                 : controller.product.value!.productInventorySet[attributeIndex],

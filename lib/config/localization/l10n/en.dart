@@ -303,4 +303,5 @@ const Map<String, String> english = {
   "confirm": "Confirm",
   "fetchAddressError": "Error occurred while fetching address, Try again",
   "pickHere": "Pick Here",
+  "pleaseChooseAttribute": "Please choose product attribute",
 };

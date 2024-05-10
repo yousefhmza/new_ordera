@@ -19,6 +19,7 @@ class CartProduct {
   int? childCategory;
   Map<String, dynamic>? attributes;
   int? variantId;
+  String? attributesHash;
   dynamic taxOSR;
 
   CartProduct({
@@ -36,6 +37,7 @@ class CartProduct {
     this.childCategory,
     this.attributes,
     this.variantId,
+    this.attributesHash,
     this.taxOSR,
   });
 
@@ -52,8 +54,9 @@ class CartProduct {
         category: json[StorageKeys.category],
         subcategory: json[StorageKeys.subcategory],
         childCategory: json[StorageKeys.childCategory],
-        attributes: json[StorageKeys.attributes],
+        attributes: jsonDecode(json[StorageKeys.attributes]),
         variantId: json[StorageKeys.variantId],
+        attributesHash: json[StorageKeys.attributesHash] ?? "",
         taxOSR: json[StorageKeys.taxOptionsSumRate],
       );
 
@@ -72,6 +75,7 @@ class CartProduct {
     int? childCategory,
     Map<String, dynamic>? attributes,
     int? variantId,
+    String? attributesHash,
     dynamic taxOSR,
   }) {
     this.productId = productId ?? this.productId;
@@ -88,6 +92,7 @@ class CartProduct {
     this.childCategory = childCategory ?? this.childCategory;
     this.attributes = attributes ?? this.attributes;
     this.variantId = variantId ?? this.variantId;
+    this.attributesHash = attributesHash ?? this.attributesHash;
     this.taxOSR = taxOSR ?? this.taxOSR;
   }
 
@@ -107,6 +112,7 @@ class CartProduct {
       StorageKeys.childCategory: childCategory,
       StorageKeys.attributes: jsonEncode(attributes),
       StorageKeys.variantId: variantId,
+      StorageKeys.attributesHash: attributesHash ?? "",
       StorageKeys.taxOptionsSumRate: taxOSR,
     };
   }
