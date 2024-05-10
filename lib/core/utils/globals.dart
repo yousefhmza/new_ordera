@@ -246,28 +246,28 @@ class Settings {
     }
   }
 
-  Widget getCategoryChip({CategoryModel? category, required bool isSelected, required VoidCallback onTap}) {
+  Widget getCategoryChip({required CategoryModel category, required bool isSelected, required VoidCallback onTap}) {
     switch (categoryChip) {
       case 1:
-        return CategoryChip1(isSelected: isSelected, onTap: onTap);
+        return CategoryChip1(category: category, isSelected: isSelected, onTap: onTap);
       case 2:
-        return CategoryChip2(isSelected: isSelected, onTap: onTap);
+        return CategoryChip2(category: category, isSelected: isSelected, onTap: onTap);
       case 3:
-        return CategoryChip5(isSelected: isSelected, onTap: onTap);
+        return CategoryChip5(category: category, isSelected: isSelected, onTap: onTap);
       case 4:
-        return CategoryChip4(isSelected: isSelected, onTap: onTap);
+        return CategoryChip4(category: category, isSelected: isSelected, onTap: onTap);
       case 5:
-        return CategoryChip5(isSelected: isSelected, onTap: onTap);
+        return CategoryChip5(category: category, isSelected: isSelected, onTap: onTap);
       case 6:
-        return CategoryChip6(isSelected: isSelected, onTap: onTap);
+        return CategoryChip6(category: category, isSelected: isSelected, onTap: onTap);
       case 7:
-        return CategoryChip7(isSelected: isSelected, onTap: onTap);
+        return CategoryChip7(category: category, isSelected: isSelected, onTap: onTap);
       case 8:
-        return CategoryChip8(isSelected: isSelected, onTap: onTap);
+        return CategoryChip8(category: category, isSelected: isSelected, onTap: onTap);
       case 9:
-        return CategoryChip6(isSelected: isSelected, onTap: onTap);
+        return CategoryChip6(category: category, isSelected: isSelected, onTap: onTap);
       case 10:
-        return CategoryChip8(isSelected: isSelected, onTap: onTap);
+        return CategoryChip8(category: category, isSelected: isSelected, onTap: onTap);
       default:
         return Container();
     }

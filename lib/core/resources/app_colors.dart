@@ -36,5 +36,6 @@ class AppColors {
   static const Color tealA700 = Color(0XFF17CB9E);
   static const Color yellow800 = Color(0XFFF79E1B);
   static const Color error = Color(0xffd72828);
+  static const Color ratingStar = Colors.amber;
   static const Color textFieldBorder = Color(0xffbababa);
 }

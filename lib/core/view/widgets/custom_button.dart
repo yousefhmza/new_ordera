@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../resources/resources.dart';
@@ -12,6 +13,7 @@ class CustomButton extends StatelessWidget {
   final double? height;
   final double? width;
   final double? textHeight;
+  final double? borderRadius;
   final double fontSize;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
@@ -29,12 +31,13 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.height,
     this.textHeight,
+    this.borderRadius,
     this.buttonTextStyle,
     this.padding,
     this.margin,
     this.isOutlined = false,
-    this.fontSize = FontSize.s14,
     this.isLoading = false,
+    this.fontSize = FontSize.s14,
   });
 
   @override
@@ -53,11 +56,11 @@ class CustomButton extends StatelessWidget {
                 : onPressed == null
                     ? AppColors.grey
                     : color ?? AppColors.primary,
-            borderRadius: BorderRadius.circular(AppSize.s10),
+            borderRadius: BorderRadius.circular(borderRadius ?? AppSize.s10),
           ),
           child: InkWell(
             onTap: isLoading ? null : onPressed,
-            borderRadius: BorderRadius.circular(AppSize.s10),
+            borderRadius: BorderRadius.circular(borderRadius ?? AppSize.s10),
             child: Container(
               padding: height != null
                   ? const EdgeInsets.symmetric(horizontal: AppPadding.p16)

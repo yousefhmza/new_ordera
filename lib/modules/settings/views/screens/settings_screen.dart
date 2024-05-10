@@ -96,7 +96,13 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 OptionItem(
                   text: AppStrings.lblSignOut.tr,
-                  onTap: () => Get.offAllNamed(Routes.loginScreen),
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => ConfirmationDialog(
+                      title: AppStrings.msgSureSignOut.tr,
+                      onYes: () => Get.toNamed(Routes.loginScreen),
+                    ),
+                  ),
                   showDivider: false,
                   isBold: true,
                   color: AppColors.red500,

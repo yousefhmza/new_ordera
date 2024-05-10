@@ -11,13 +11,13 @@ class AllCategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<CategoryModel> categories = Get.arguments["categories"];
     return Scaffold(
       appBar: MainAppbar(title: AppStrings.lblCategories.tr),
       body: GridView.builder(
         padding: const EdgeInsets.all(AppPadding.p16),
-        itemBuilder: (context, index) => CategoryItem(CategoryModel.fromJson({})),
-        // itemCount: controller.categories.length,
-        itemCount: 4,
+        itemBuilder: (context, index) => CategoryItem(categories[index]),
+        itemCount: categories.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           childAspectRatio: 1,

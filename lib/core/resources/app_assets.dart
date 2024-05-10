@@ -251,6 +251,7 @@ class AppImages {
   static const String sushi = 'assets/images/img_sushi.jpg';
 
   static const String pizza = 'assets/images/pizza.jpeg';
+  static const String placeholder = 'assets/images/placeholder.png';
 }
 
 class AppIcons {

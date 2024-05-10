@@ -2,6 +2,9 @@
 export './components/app_bottom_sheet.dart';
 export './components/error_component.dart';
 export './components/pick_image_sheet.dart';
+export './components/confirmation_dialog.dart';
+export './components/paginated_grid_view.dart';
+export './components/paginated_list_view.dart';
 
 // Screens
 

@@ -1,6 +1,9 @@
+import 'package:ecommerce/config/navigation/navigation.dart';
+import 'package:ecommerce/core/resources/app_values.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/modules/categories/models/responses/category_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../config/theme/theme.dart';
 import '../../../../core/view/views.dart';
@@ -12,24 +15,30 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 23.h, vertical: 10.v),
-      decoration: AppDecoration.outlineGray200.copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomImage(
-            image: category.imageUrl,
-            height: 48.adaptSize,
-            width: 48.adaptSize,
-          ),
-          SizedBox(height: 3.v),
-          CustomText(
-            category.name,
-            style: CustomTextStyles.labelLargeCairoBlack900,
-          ),
-        ],
+    return InkWell(
+      borderRadius: BorderRadiusStyle.roundedBorder10,
+      onTap: () => Get.toNamed(Routes.categoryProductsScreen, arguments: {"category": category}),
+      child: Container(
+        width: 104.v,
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.p12,
+          vertical: 10.v,
+        ),
+        decoration: AppDecoration.outlineGray200.copyWith(borderRadius: BorderRadiusStyle.roundedBorder10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomImage(image: category.imageUrl, height: 48.adaptSize, width: 48.adaptSize),
+            const VerticalSpace(AppSize.s6),
+            CustomText(
+              category.name,
+              maxLines: 1,
+              autoSized: true,
+              style: CustomTextStyles.labelLargeCairoBlack900,
+            ),
+          ],
+        ),
       ),
     );
   }

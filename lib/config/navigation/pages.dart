@@ -1,3 +1,4 @@
+import 'package:ecommerce/modules/categories/binding/category_products_binding.dart';
 import 'package:ecommerce/modules/layout/binding/layout_binding.dart';
 import 'package:ecommerce/modules/layout/view/screens/layout_screen.dart';
 import 'package:ecommerce/modules/legal/binding/terms_and_conditions_binding.dart';
@@ -12,6 +13,7 @@ import 'package:ecommerce/modules/payment/binding/payment_methods_binding.dart';
 import 'package:ecommerce/modules/payment/view/screens/add_payment_method_screen.dart';
 import 'package:ecommerce/modules/payment/view/screens/payment_methods_screen.dart';
 import 'package:ecommerce/modules/product/binding/product_detail_binding.dart';
+import 'package:ecommerce/modules/product/views/screens/product_reviews_screen.dart';
 import 'package:ecommerce/modules/settings/views/screens/choose_components_screen.dart';
 import 'package:ecommerce/modules/spalsh/binding/splash_binding.dart';
 import 'package:get/get.dart';
@@ -150,6 +152,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.categoryProductsScreen,
+      binding: CategoryProductsBinding(),
       page: () => CategoryProductsScreen(),
       transition: Transition.cupertino,
     ),
@@ -162,6 +165,11 @@ class Pages {
       name: Routes.termsAndConditionsScreen,
       binding: TermsAndConditionsBinding(),
       page: () => TermsAndConditionScreen(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: Routes.productReviewsScreen,
+      page: () => ProductReviewsScreen(),
       transition: Transition.cupertino,
     ),
   ];

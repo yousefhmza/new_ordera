@@ -2,7 +2,7 @@ import 'package:ecommerce/core/utils/json_utils.dart';
 import 'package:ecommerce/modules/product/models/responses/product_inventory_model.dart';
 
 import '../../../categories/models/responses/category_model.dart';
-import '../../../product/models/responses/product_attribute_model.dart';
+import '../../../product/models/responses/product_color_or_size_model.dart';
 import '../../../categories/models/responses/child_category_model.dart';
 import 'delivery_option_model.dart';
 import 'inventory_details_model.dart';
@@ -40,8 +40,8 @@ class Product {
   final CategoryModel subCategory;
   final List<ChildCategory> childCategory;
   final List<Tag> tag;
-  final List<ProductAttribute> color;
-  final List<ProductAttribute> sizes;
+  final List<ProductColorOrSize> color;
+  final List<ProductColorOrSize> sizes;
   final dynamic campaignProduct;
   final List<InventoryDetails> inventoryDetail;
   final List<ProductReview> reviews;
@@ -125,10 +125,10 @@ class Product {
         tag: json["tag"] == null ? [] : List<Tag>.from(json["tag"].map((x) => Tag.fromJson(x))),
         color: json["color"] == null
             ? []
-            : List<ProductAttribute>.from(json["color"].map((color) => ProductAttribute.fromJson(color))),
+            : List<ProductColorOrSize>.from(json["color"].map((color) => ProductColorOrSize.fromJson(color))),
         sizes: json["sizes"] == null
             ? []
-            : List<ProductAttribute>.from(json["sizes"].map((size) => ProductAttribute.fromJson(size))),
+            : List<ProductColorOrSize>.from(json["sizes"].map((size) => ProductColorOrSize.fromJson(size))),
         campaignProduct: json["campaign_product"],
         inventoryDetail: json["inventory_detail"] == null
             ? []

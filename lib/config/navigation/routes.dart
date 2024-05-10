@@ -21,4 +21,5 @@ class Routes {
   static const String addressFormScreen = '/address_form_screen';
   static const String chooseOnMapScreen = '/choose_on_map_screen';
   static const String termsAndConditionsScreen = '/terms_and_conditions_screen';
+  static const String productReviewsScreen = '/product_reviews_screen';
 }

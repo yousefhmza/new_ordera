@@ -294,4 +294,8 @@ const Map<String, String> english = {
   "city": "City",
   "lbl_postal_code": "Postal Code",
   "lbl_phone": "Phone",
+  "lbl_attributes": "Attributes",
+  "writeAReview": "Write a review",
+  "postAReview": "Post a review",
+  "reviewAddedSuccessfully": "Your review is added successfully",
 };

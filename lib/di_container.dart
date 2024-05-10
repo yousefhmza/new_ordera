@@ -9,7 +9,9 @@ import 'package:ecommerce/modules/auth/controller/login_controller.dart';
 import 'package:ecommerce/modules/auth/controller/registration_controller.dart';
 import 'package:ecommerce/modules/auth/repositories/auth_repo.dart';
 import 'package:ecommerce/modules/cart/controller/shopping_cart_controller.dart';
+import 'package:ecommerce/modules/cart/repos/cart_repo.dart';
 import 'package:ecommerce/modules/categories/controller/categories_controller.dart';
+import 'package:ecommerce/modules/categories/controller/category_products_controller.dart';
 import 'package:ecommerce/modules/categories/repo/categories_repo.dart';
 import 'package:ecommerce/modules/following/controller/following_controller.dart';
 import 'package:ecommerce/modules/home/controller/home_controller.dart';
@@ -34,6 +36,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'core/services/local/cache_client.dart';
+import 'core/services/local/cart_database.dart';
 import 'core/services/network/api_client.dart';
 import 'core/services/network/network_info.dart';
 
@@ -53,6 +56,9 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfo(sl<Connectivity>()));
   sl.registerLazySingleton<ApiClient>(() => ApiClient(sl<Dio>(), sl<CacheClient>(), sl<PrettyDioLogger>()));
 
+  // Local
+  sl.registerLazySingleton<CartDatabase>(() => CartDatabase()..initDatabase());
+
   // Repositories
   sl.registerLazySingleton<AuthRepo>(() => AuthRepo(sl<ApiClient>(), sl<CacheClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<AccountRepo>(() => AccountRepo(sl<ApiClient>(), sl<NetworkInfo>()));
@@ -62,6 +68,7 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeRepo>(() => HomeRepo(sl<ApiClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<CategoriesRepo>(() => CategoriesRepo(sl<ApiClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<ProductsRepo>(() => ProductsRepo(sl<ApiClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<CartRepo>(() => CartRepo(sl<CartDatabase>()));
 
   // Controllers
   sl.registerFactory<L10nController>(() => L10nController(sl<CacheClient>()));
@@ -70,6 +77,7 @@ Future<void> init() async {
   sl.registerFactory<RegionsController>(() => RegionsController(sl<RegionsRepo>()));
   sl.registerFactory<LoginController>(() => LoginController(sl<AuthRepo>()));
   sl.registerFactory<RegistrationController>(() => RegistrationController(sl<AuthRepo>()));
+  sl.registerFactory<CategoryProductsController>(() => CategoryProductsController(sl<CategoriesRepo>()));
   sl.registerFactory<LayoutController>(() => LayoutController());
   sl.registerFactory<FollowingController>(() => FollowingController());
   sl.registerFactory<AccountController>(() => AccountController());
@@ -80,9 +88,9 @@ Future<void> init() async {
   sl.registerFactory<AddressesController>(() => AddressesController());
   sl.registerFactory<ChooseOnMapController>(() => ChooseOnMapController());
   sl.registerFactory<HomeController>(() => HomeController(sl<HomeRepo>(), sl<CategoriesRepo>()));
-  sl.registerFactory<ProductDetailsController>(() => ProductDetailsController(sl<ProductsRepo>()));
+  sl.registerFactory<ProductDetailsController>(() => ProductDetailsController(sl<ProductsRepo>(), sl<CartRepo>()));
   sl.registerFactory<CartController>(() => CartController());
-  sl.registerFactory<CategoriesController>(() => CategoriesController());
+  sl.registerFactory<CategoriesController>(() => CategoriesController(sl<CategoriesRepo>()));
   sl.registerFactory<OrderController>(() => OrderController());
   sl.registerFactory<TermsAndConditionsController>(() => TermsAndConditionsController(sl<LegalRepo>()));
 }

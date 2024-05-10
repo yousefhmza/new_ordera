@@ -1,3 +1,6 @@
+import 'package:ecommerce/config/navigation/navigation.dart';
+import 'package:ecommerce/core/utils/sheets.dart';
+import 'package:ecommerce/modules/product/views/components/add_review_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,11 +22,11 @@ class ProductReviewsComponent extends GetWidget<ProductDetailsController> {
           Row(
             children: [
               CustomText(
-                "${AppStrings.lblReviews102.tr} (${controller.product.value!.product.reviewsCount})",
+                "${AppStrings.lblReviews102.tr} (${controller.product.value!.ratings.length})",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontSize: FontSize.s16,
-                  fontWeight: FontWeightManager.regular,
-                ),
+                      fontSize: FontSize.s16,
+                      fontWeight: FontWeightManager.regular,
+                    ),
               ),
               const Spacer(),
               CustomButton(
@@ -31,22 +34,33 @@ class ProductReviewsComponent extends GetWidget<ProductDetailsController> {
                 isOutlined: true,
                 textColor: AppColors.primary,
                 text: AppStrings.lblRateProduct.tr,
-                onPressed: () {},
+                onPressed: () => AppSheets.showBottomSheet(
+                  context,
+                  child: AddReviewSheet(product: controller.product.value!.product),
+                ),
               )
             ],
           ),
-          const VerticalSpace(AppSize.s16),
-          ReviewItem(),
-          const VerticalSpace(AppSize.s16),
-          ReviewItem(),
-          const VerticalSpace(AppSize.s16),
+          ...List.generate(
+            controller.product.value!.ratings.length > 2 ? 2 : controller.product.value!.ratings.length,
+            (index) => Padding(
+              padding: const EdgeInsets.only(top: AppPadding.p16),
+              child: ReviewItem(controller.product.value!.ratings[index]),
+            ),
+          ),
           Center(
-            child: CustomText(
-              AppStrings.msgViewAllReviews.tr,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: AppColors.primary,
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.primary,
+            child: InkWell(
+              onTap: () => Get.toNamed(
+                Routes.productReviewsScreen,
+                arguments: {"reviews": controller.product.value!.ratings},
+              ),
+              child: CustomText(
+                AppStrings.msgViewAllReviews.tr,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: AppColors.primary,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.primary,
+                    ),
               ),
             ),
           )

@@ -7,7 +7,9 @@ import '../../resources/resources.dart';
 import '../local/cache_client.dart';
 import '../local/storage_keys.dart';
 
-const String _baseURL = "https://hexfashion.xyz/api/tenant/v1";
+const String appDomain = "http://hexfashion.xyz";
+const String mediaPath = "$appDomain/assets/tenant/uploads/media-uploader/hexfashion";
+const String _baseURL = "$appDomain/api/tenant/v1";
 const String _contentType = "Content-Type";
 const String _accept = "accept";
 const String _applicationJson = "application/json";

@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/base/models/image_model.dart';
 import 'package:ecommerce/core/utils/json_utils.dart';
-import 'package:ecommerce/modules/product/models/responses/product_attribute_model.dart';
+import 'package:ecommerce/modules/product/models/responses/product_color_or_size_model.dart';
 
 class InventoryDetails {
   final int id;
@@ -16,8 +16,8 @@ class InventoryDetails {
   final int soldCount;
   final List<Attribute> attribute;
   final ImageModel attrImage;
-  final ProductAttribute productColor;
-  final ProductAttribute productSize;
+  final ProductColorOrSize productColor;
+  final ProductColorOrSize productSize;
 
   InventoryDetails({
     required this.id,
@@ -51,8 +51,8 @@ class InventoryDetails {
         soldCount: JsonUtils.parseIntFromJson(json["sold_count"]),
         attribute: List<Attribute>.from(json["attribute"].map((x) => Attribute.fromJson(x))),
         attrImage: ImageModel.fromJson(json["attr_image"] ?? {}),
-        productColor: ProductAttribute.fromJson(json["product_color"] ?? {}),
-        productSize: ProductAttribute.fromJson(json["product_size"] ?? {}),
+        productColor: ProductColorOrSize.fromJson(json["product_color"] ?? {}),
+        productSize: ProductColorOrSize.fromJson(json["product_size"] ?? {}),
       );
 }
 

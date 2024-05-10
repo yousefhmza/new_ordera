@@ -2,13 +2,15 @@ import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/resources/resources.dart';
+import '../../../models/responses/category_model.dart';
 import '../../../../../core/view/views.dart';
 
 class CategoryChip5 extends StatelessWidget {
   final bool isSelected;
+  final CategoryModel category;
   final VoidCallback onTap;
 
-  const CategoryChip5({required this.isSelected, required this.onTap, super.key});
+  const CategoryChip5({required this.category, required this.isSelected, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CategoryChip5 extends StatelessWidget {
       child: Column(
         children: [
           CustomText(
-            "PIZZA",
+            category.name,
             style: TextStyle(
               color: isSelected ? AppColors.black : AppColors.gray400,
               fontSize: FontSize.s12.adaptSize,

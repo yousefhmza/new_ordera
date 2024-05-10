@@ -1,6 +1,6 @@
 import 'package:ecommerce/core/utils/json_utils.dart';
 
-class ProductAttribute {
+class ProductColorOrSize {
   final int id;
   final String name;
   final String colorCode;
@@ -10,7 +10,7 @@ class ProductAttribute {
   final int laravelThroughKey;
   final String sizeCode;
 
-  ProductAttribute({
+  ProductColorOrSize({
     required this.id,
     required this.name,
     required this.colorCode,
@@ -21,7 +21,7 @@ class ProductAttribute {
     required this.sizeCode,
   });
 
-  factory ProductAttribute.fromJson(Map<String, dynamic> json) => ProductAttribute(
+  factory ProductColorOrSize.fromJson(Map<String, dynamic> json) => ProductColorOrSize(
         id: JsonUtils.parseIntFromJson(json["id"]),
         name: JsonUtils.parseStringFromJson(json["name"]),
         colorCode: JsonUtils.parseStringFromJson(json["color_code"]),

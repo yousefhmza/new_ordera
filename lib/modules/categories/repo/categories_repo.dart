@@ -20,11 +20,14 @@ class CategoriesRepo extends BaseRepository {
     );
   }
 
-  Future<Either<Failure, PaginationModel<InListProductModel>>> getCategoryProducts(String categoryName) async {
+  Future<Either<Failure, PaginationModel<InListProductModel>>> getCategoryProducts(
+    String categoryName, {
+    int page = 1,
+  }) async {
     return super.call(
       httpRequest: () => _apiClient.get(
         url: EndPoints.search,
-        queryParameters: {"category": categoryName},
+        queryParameters: {"category": categoryName, "page": page},
       ),
       successReturn: (data) => PaginationModel.fromJson(
         data,

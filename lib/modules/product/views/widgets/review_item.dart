@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/resources/resources.dart';
-import '../../../../core/utils/constants.dart';
 import '../../../../core/view/views.dart';
+import '../../models/responses/product_review_model.dart';
 
 class ReviewItem extends StatelessWidget {
-  const ReviewItem({super.key});
+  final ProductReview review;
+
+  const ReviewItem(this.review, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,26 +21,26 @@ class ReviewItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomImage(
-              image: Constants.tomCruiseImage,
+              image: review.user.image.isEmpty ? AppImages.placeholder : review.user.image,
               width: AppSize.s40,
               height: AppSize.s40,
               borderRadius: AppSize.s250,
             ),
-            HorizontalSpace(AppSize.s8),
+            const HorizontalSpace(AppSize.s8),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
-                    "Mohamed ahmed",
+                    review.user.name,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontSize: FontSize.s16,
-                      fontWeight: FontWeightManager.regular,
-                    ),
+                          fontSize: FontSize.s16,
+                          fontWeight: FontWeightManager.regular,
+                        ),
                   ),
                   RatingBar.builder(
                     itemCount: 5,
-                    initialRating: 3,
+                    initialRating: review.rating.toDouble(),
                     itemSize: AppSize.s16,
                     unratedColor: AppColors.grey.withOpacity(0.4),
                     glow: false,
@@ -51,18 +53,18 @@ class ReviewItem extends StatelessWidget {
               ),
             ),
             CustomText(
-              "1 Month",
+              DateFormat.yMMMEd().format(review.createdAt),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: AppColors.gray600,
-                fontWeight: FontWeightManager.regular,
-                fontSize: FontSize.s12,
-              ),
+                    color: AppColors.gray600,
+                    fontWeight: FontWeightManager.regular,
+                    fontSize: FontSize.s12,
+                  ),
             )
           ],
         ),
         const VerticalSpace(AppSize.s8),
         CustomText(
-          AppStrings.msgLoremIpsumDolor.tr,
+          review.reviewText,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: FontSize.s12),
         ),
       ],

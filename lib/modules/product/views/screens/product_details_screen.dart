@@ -1,5 +1,7 @@
+import 'package:ecommerce/modules/product/views/components/product_attributes_component.dart';
 import 'package:ecommerce/modules/product/views/components/similar_products_component.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/resources/resources.dart';
@@ -17,10 +19,7 @@ class ProductDetailsScreen extends GetWidget<ProductDetailsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppbar(
-        title: "",
-        actions: [CustomIcon.svg(AppImages.imgIconCart)]
-      ),
+      appBar: MainAppbar(title: "", actions: [CustomIcon.svg(AppImages.imgIconCart)]),
       body: Obx(
         () => controller.isLoadingProduct.value
             ? const LoadingSpinner()
@@ -34,9 +33,7 @@ class ProductDetailsScreen extends GetWidget<ProductDetailsController> {
                         const ProductImagesSlider(),
                         const VerticalSpace(AppSize.s32),
                         const ProductPrimaryDataComponent(),
-                        const VerticalSpace(AppSize.s24),
-                        const Divider(height: AppSize.s1, indent: AppPadding.p20, endIndent: AppPadding.p20),
-                        const VerticalSpace(AppSize.s24),
+                        ProductAttributesComponent(controller.product.value!.product),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
                           child: CustomText(
@@ -47,18 +44,10 @@ class ProductDetailsScreen extends GetWidget<ProductDetailsController> {
                         const VerticalSpace(AppSize.s8),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
-                          child: CustomText(
-                            controller.product.value!.product.description,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(fontSize: FontSize.s12, color: AppColors.gray600),
-                          ),
+                          child: HtmlWidget(controller.product.value!.product.description),
                         ),
-                        const VerticalSpace(AppSize.s24),
-                        const Divider(height: AppSize.s1, indent: AppPadding.p20, endIndent: AppPadding.p20),
-                        const VerticalSpace(AppSize.s24),
-                        ProductReviewsComponent(),
+                        const Divider(height: AppSize.s48, indent: AppPadding.p20, endIndent: AppPadding.p20),
+                        const ProductReviewsComponent(),
                         const VerticalSpace(AppSize.s64),
                         SimilarProductsComponent(),
                         const VerticalSpace(AppSize.s82),

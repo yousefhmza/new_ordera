@@ -11,6 +11,8 @@ class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> colors =
+        controller.product.value!.product.color.map((e) => e.colorCode).toList().toSet().toList();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
       child: Column(
@@ -34,6 +36,15 @@ class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
                 flex: 1,
                 child: Column(
                   children: [
+                    if (controller.product.value!.product.salePrice < controller.product.value!.product.price)
+                      CustomText(
+                        "${AppStrings.usd.tr} ${controller.product.value!.product.price.toStringAsFixed(1)}",
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              decoration: TextDecoration.lineThrough,
+                              fontSize: FontSize.s12,
+                              color: AppColors.gray500,
+                            ),
+                      ),
                     CustomText(
                       "${AppStrings.usd.tr} ${controller.product.value!.product.salePrice.toStringAsFixed(1)}",
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -42,7 +53,6 @@ class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
                             color: AppColors.primary,
                           ),
                     ),
-                    const VerticalSpace(AppSize.s4),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -59,6 +69,7 @@ class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
                   ],
                 ),
               ),
+              const HorizontalSpace(AppSize.s8),
               CustomIcon.svg(AppImages.imgFavoriteLight),
             ],
           ),
@@ -71,17 +82,15 @@ class ProductPrimaryDataComponent extends GetWidget<ProductDetailsController> {
               ),
               const Spacer(),
               ...List.generate(
-                controller.product.value!.product.color.length,
+                colors.length,
                 (index) => Padding(
-                  padding: EdgeInsetsDirectional.only(start: AppPadding.p8),
-                  child: CircleAvatar(
-                    radius: AppSize.s8,
-                    backgroundColor: HexColor.fromHex(controller.product.value!.product.color[index].colorCode),
-                  ),
+                  padding: const EdgeInsetsDirectional.only(start: AppPadding.p8),
+                  child: CircleAvatar(radius: AppSize.s8, backgroundColor: HexColor.fromHex(colors[index])),
                 ),
               ),
             ],
-          )
+          ),
+          const Divider(height: AppSize.s48, indent: AppPadding.p20, endIndent: AppPadding.p20),
         ],
       ),
     );

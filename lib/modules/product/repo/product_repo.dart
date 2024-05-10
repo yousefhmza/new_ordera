@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce/modules/product/models/requests/review_body.dart';
 import 'package:ecommerce/modules/product/models/responses/product_details_model.dart';
+import 'package:ecommerce/modules/product/models/responses/product_review_model.dart';
 
 import '../../../core/base/repositories/base_repository.dart';
 import '../../../core/services/error/failure.dart';
@@ -15,6 +17,13 @@ class ProductsRepo extends BaseRepository {
     return super.call<ProductDetailsModel>(
       httpRequest: () => _apiClient.get(url: '${EndPoints.productDetails}/$id', useToken: false),
       successReturn: (data) => ProductDetailsModel.fromJson(data),
+    );
+  }
+
+  Future<Either<Failure, ProductReview>> addReview(ReviewBody reviewBody) {
+    return super.call<ProductReview>(
+      httpRequest: () => _apiClient.post(url: EndPoints.writeReview,requestBody: reviewBody.toJson()),
+      successReturn: (data) => ProductReview.fromJson(data["data"]),
     );
   }
 }

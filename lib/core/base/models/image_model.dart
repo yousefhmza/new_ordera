@@ -1,3 +1,4 @@
+import 'package:ecommerce/core/services/network/api_client.dart';
 import 'package:ecommerce/core/utils/json_utils.dart';
 
 class ImageModel {
@@ -28,7 +29,7 @@ class ImageModel {
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
         id: JsonUtils.parseIntFromJson(json["id"]),
         title: JsonUtils.parseStringFromJson(json["title"]),
-        path: JsonUtils.parseStringFromJson(json["path"]),
+        path: JsonUtils.parseStringFromJson("$mediaPath/${json["path"]}"),
         alt: json["alt"],
         size: JsonUtils.parseStringFromJson(json["size"]),
         userType: JsonUtils.parseIntFromJson(json["user_type"]),

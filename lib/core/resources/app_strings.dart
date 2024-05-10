@@ -300,5 +300,9 @@ class AppStrings {
   static const String state = "state";
   static const String city = "city";
   static const String lblPostalCode = "lbl_postal_code";
-  static const String lblPhone= "lbl_phone";
+  static const String lblPhone = "lbl_phone";
+  static const String lblAttributes = "lbl_attributes";
+  static const String writeAReview = "writeAReview";
+  static const String postAReview = "postAReview";
+  static const String reviewAddedSuccessfully = "reviewAddedSuccessfully";
 }
