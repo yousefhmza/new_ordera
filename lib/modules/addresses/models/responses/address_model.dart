@@ -10,13 +10,14 @@ class Address {
   final String fullName;
   final String phone;
   final String email;
-  final String city;
+  final int cityId;
   final String postCode;
   final String address;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final Region state;
   final Region country;
+  final Region state;
+  final Region city;
 
   Address({
     required this.id,
@@ -26,13 +27,14 @@ class Address {
     required this.fullName,
     required this.phone,
     required this.email,
-    required this.city,
+    required this.cityId,
     required this.address,
     required this.createdAt,
     required this.updatedAt,
     required this.postCode,
     required this.state,
     required this.country,
+    required this.city,
   });
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
@@ -44,11 +46,12 @@ class Address {
         postCode: JsonUtils.parseStringFromJson(json["postal_code"]),
         phone: JsonUtils.parseStringFromJson(json["phone"]),
         email: JsonUtils.parseStringFromJson(json["email"]),
-        city: JsonUtils.parseStringFromJson(json["city"]),
+        cityId: JsonUtils.parseIntFromJson(json["city"]),
         address: JsonUtils.parseStringFromJson(json["address"]),
         createdAt: JsonUtils.parseDatetimeFromJson(json["created_at"]),
         updatedAt: JsonUtils.parseDatetimeFromJson(json["updated_at"]),
         state: Region.fromJson(json["state"] ?? {}),
         country: Region.fromJson(json["country"] ?? {}),
+        city: Region.fromJson(json["city_rel"] ?? {}),
       );
 }

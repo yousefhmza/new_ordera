@@ -13,7 +13,7 @@ class AccountRepo extends BaseRepository {
   Future<Either<Failure, UserModel>> getProfile() async {
     return super.call<UserModel>(
       httpRequest: () => _apiClient.get(url: EndPoints.profileData),
-      successReturn: (data) => UserModel.fromJson(data),
+      successReturn: (data) => UserModel.fromJson(data["user_details"]),
     );
   }
 }

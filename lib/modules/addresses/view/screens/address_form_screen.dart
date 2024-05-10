@@ -2,6 +2,7 @@ import 'package:ecommerce/config/navigation/navigation.dart';
 import 'package:ecommerce/core/resources/resources.dart';
 import 'package:ecommerce/core/services/responsive_service.dart';
 import 'package:ecommerce/core/utils/validators.dart';
+import 'package:ecommerce/modules/addresses/controller/address_form_controller.dart';
 import 'package:ecommerce/modules/addresses/view/components/address_field_component.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,19 +10,17 @@ import 'package:get/get.dart';
 import '../../../../core/view/views.dart';
 import 'package:flutter/material.dart';
 
-class AddressFormScreen extends StatelessWidget {
+class AddressFormScreen extends GetWidget<AddressFormController> {
   const AddressFormScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppbar(
-        // title: controller.isAddingAddress
-        title: false
-            ? AppStrings.lblAddNewAddress.tr : AppStrings.lblEditAddress.tr,
+        title: AppStrings.lblEditAddress.tr,
       ),
       body: Form(
-        // key: controller.formKey,
+        key: controller.formKey,
         child: CustomScrollView(
           slivers: [
             const VerticalSpace.sliver(AppSize.s24),
@@ -29,17 +28,14 @@ class AddressFormScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
               sliver: SliverToBoxAdapter(
                 child: AddressFieldComponent(
-                  title: AppStrings.lblType.tr,
-                  desc: AppStrings.lblPlaceType.tr,
-                  field: CustomDropDownField(
-                    items: [
-                      // DropdownMenuItem(value: AddressType.home, child: CustomText(AddressType.home.text)),
-                      // DropdownMenuItem(value: AddressType.workplace, child: CustomText(AddressType.workplace.text))
-                    ],
-                    // value: controller.addressBody.addressType,
-                    // validator: (value) => Validators.required(value?.name),
-                    // onChanged: (value) => controller.addressBody.copyWith(addressType: value),
-                    hintText: AppStrings.lblHome.tr,
+                  title: AppStrings.addressName.tr,
+                  desc: AppStrings.typeAddressName.tr,
+                  field: CustomTextField(
+                    initialValue: controller.addressBody.shippingAddressName,
+                    hintText: AppStrings.typeAddressName.tr,
+                    keyBoardType: TextInputType.streetAddress,
+                    onChanged: (value) => controller.addressBody.copyWith(shippingAddressName: value),
+                    validator: Validators.required,
                   ),
                 ),
               ),
@@ -52,50 +48,21 @@ class AddressFormScreen extends StatelessWidget {
                   title: AppStrings.lblAddress.tr,
                   desc: AppStrings.lblTypeAddress.tr,
                   field: CustomTextField(
-                    // initialValue: controller.addressBody.address,
                     hintText: AppStrings.lblTypeAddress.tr,
+                    controller: controller.addressTextController,
                     keyBoardType: TextInputType.streetAddress,
-                    // onChanged: (value) => controller.addressBody.copyWith(address: value),
-                    // validator: Validators.required,
+                    onChanged: (value) => controller.addressBody.copyWith(address: value),
+                    validator: Validators.required,
                     suffix: InkWell(
-                      onTap: () => Get.toNamed(Routes.chooseOnMapScreen),
+                      onTap: () async {
+                        final address = await Get.toNamed(Routes.chooseOnMapScreen);
+                        if (address != null) {
+                          controller.addressTextController.text = address;
+                          controller.addressBody.copyWith(address: address);
+                        }
+                      },
                       child: const CustomIcon.svg(AppImages.imgUnionPrimary, size: AppSize.s20),
                     ),
-                  ),
-                ),
-              ),
-            ),
-            VerticalSpace.sliver(28.v),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-              sliver: SliverToBoxAdapter(
-                child: AddressFieldComponent(
-                  title: AppStrings.lblHouseNo.tr,
-                  desc: AppStrings.msgTypeYourHouse.tr,
-                  field: CustomTextField(
-                    // initialValue: controller.addressBody.houseNumber,
-                    hintText: AppStrings.msgYourHomeNumber.tr,
-                    keyBoardType: TextInputType.number,
-                    formatters: [FilteringTextInputFormatter.digitsOnly],
-                    // onChanged: (value) => controller.addressBody.copyWith(houseNumber: value),
-                    // validator: Validators.required,
-                  ),
-                ),
-              ),
-            ),
-            VerticalSpace.sliver(28.v),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24),
-              sliver: SliverToBoxAdapter(
-                child: AddressFieldComponent(
-                  title: AppStrings.lblLandmark.tr,
-                  desc: AppStrings.msgTypeALandmark.tr,
-                  field: CustomTextField(
-                    // initialValue: controller.addressBody.landmark,
-                    hintText: AppStrings.lblLandmark.tr,
-                    textInputAction: TextInputAction.done,
-                    // onChanged: (value) => controller.addressBody.copyWith(landmark: value),
-                    // validator: Validators.required,
                   ),
                 ),
               ),
@@ -105,17 +72,18 @@ class AddressFormScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Spacer(),
-                  CustomButton(
-                    height: AppSize.s40.v,
-                    // text: controller.isAddingAddress
-                    text: false
-                        ? AppStrings.lblAdd.tr : AppStrings.lblEdit.tr,
-                    margin: const EdgeInsets.all(AppPadding.p24),
-                    onPressed: () {
-                      // if (!controller.formKey.currentState!.validate()) return;
-                      // controller.isAddingAddress ? controller.addNewAddress() : controller.updateAddress();
-                    },
-                  )
+                  Obx(
+                    () => CustomButton(
+                      isLoading: controller.isLoading.value,
+                      height: AppSize.s40.v,
+                      text: AppStrings.confirm.tr,
+                      margin: const EdgeInsets.all(AppPadding.p24),
+                      onPressed: () {
+                        if (!controller.formKey.currentState!.validate()) return;
+                        controller.addOrUpdateAddress();
+                      },
+                    ),
+                  ),
                 ],
               ),
             )

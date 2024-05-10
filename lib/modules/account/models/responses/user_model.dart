@@ -22,7 +22,7 @@ class UserModel {
   final String profileImageUrl;
   final Region userCountry;
   final Region userState;
-  final Region city;
+  final Region userCity;
   final Address deliveryAddress;
 
   UserModel({
@@ -36,7 +36,7 @@ class UserModel {
     required this.mobile,
     required this.company,
     required this.address,
-    required this.city,
+    required this.userCity,
     required this.state,
     required this.image,
     required this.country,
@@ -68,7 +68,7 @@ class UserModel {
         updatedAt: JsonUtils.parseDatetimeFromJson(json["updated_at"]),
         profileImageUrl: JsonUtils.parseStringFromJson(json["profile_image_url"]),
         userCountry: Region.fromJson(json["user_country"] ?? {}),
-        city: Region.fromJson(json["user_city"] ?? {}),
+        userCity: Region.fromJson(json["user_city"] ?? {}),
         userState: Region.fromJson(json["user_state"] ?? {}),
         deliveryAddress: Address.fromJson(json["delivery_address"] ?? {}),
       );

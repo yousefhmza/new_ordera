@@ -305,4 +305,9 @@ class AppStrings {
   static const String writeAReview = "writeAReview";
   static const String postAReview = "postAReview";
   static const String reviewAddedSuccessfully = "reviewAddedSuccessfully";
+  static const String addressName = "addressName";
+  static const String typeAddressName = "typeAddressName";
+  static const String confirm = "confirm";
+  static const String fetchAddressError = "fetchAddressError";
+  static const String pickHere = "pickHere";
 }

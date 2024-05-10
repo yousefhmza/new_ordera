@@ -1,3 +1,4 @@
+import 'package:ecommerce/modules/addresses/binding/address_form_binding.dart';
 import 'package:ecommerce/modules/categories/binding/category_products_binding.dart';
 import 'package:ecommerce/modules/layout/binding/layout_binding.dart';
 import 'package:ecommerce/modules/layout/view/screens/layout_screen.dart';
@@ -114,6 +115,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.addressFormScreen,
+      binding: AddressFormBinding(),
       page: () => AddressFormScreen(),
       transition: Transition.cupertino,
     ),

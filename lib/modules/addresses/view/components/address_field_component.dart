@@ -23,7 +23,7 @@ class AddressFieldComponent extends StatelessWidget {
           desc,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
             fontWeight: FontWeightManager.regular,
-            fontSize: FontSize.s10,
+            fontSize: FontSize.s12,
             color: AppColors.gray600,
           ),
         ),

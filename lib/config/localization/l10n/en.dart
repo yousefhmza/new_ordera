@@ -298,4 +298,9 @@ const Map<String, String> english = {
   "writeAReview": "Write a review",
   "postAReview": "Post a review",
   "reviewAddedSuccessfully": "Your review is added successfully",
+  "addressName": "Address name",
+  "typeAddressName": "Type address name",
+  "confirm": "Confirm",
+  "fetchAddressError": "Error occurred while fetching address, Try again",
+  "pickHere": "Pick Here",
 };

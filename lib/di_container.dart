@@ -2,9 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:ecommerce/config/localization/controller/l10n_controller.dart';
 import 'package:ecommerce/modules/account/controller/account_controller.dart';
 import 'package:ecommerce/modules/account/repositories/account_repo.dart';
-import 'package:ecommerce/modules/addresses/controller/add_new_address_controller.dart';
+import 'package:ecommerce/modules/addresses/controller/address_form_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/addresses_controller.dart';
 import 'package:ecommerce/modules/addresses/controller/choose_on_map_controller.dart';
+import 'package:ecommerce/modules/addresses/repos/addresses_repo.dart';
 import 'package:ecommerce/modules/auth/controller/login_controller.dart';
 import 'package:ecommerce/modules/auth/controller/registration_controller.dart';
 import 'package:ecommerce/modules/auth/repositories/auth_repo.dart';
@@ -69,6 +70,7 @@ Future<void> init() async {
   sl.registerLazySingleton<CategoriesRepo>(() => CategoriesRepo(sl<ApiClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<ProductsRepo>(() => ProductsRepo(sl<ApiClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<CartRepo>(() => CartRepo(sl<CartDatabase>()));
+  sl.registerLazySingleton<AddressesRepo>(() => AddressesRepo(sl<ApiClient>(), sl<NetworkInfo>()));
 
   // Controllers
   sl.registerFactory<L10nController>(() => L10nController(sl<CacheClient>()));
@@ -84,8 +86,8 @@ Future<void> init() async {
   sl.registerFactory<PaymentMethodsController>(() => PaymentMethodsController());
   sl.registerFactory<AddPaymentMethodController>(() => AddPaymentMethodController());
   sl.registerFactory<AddCardController>(() => AddCardController());
-  sl.registerFactory<AddNewAddressController>(() => AddNewAddressController());
-  sl.registerFactory<AddressesController>(() => AddressesController());
+  sl.registerFactory<AddressFormController>(() => AddressFormController(sl<AddressesRepo>()));
+  sl.registerFactory<AddressesController>(() => AddressesController(sl<AddressesRepo>()));
   sl.registerFactory<ChooseOnMapController>(() => ChooseOnMapController());
   sl.registerFactory<HomeController>(() => HomeController(sl<HomeRepo>(), sl<CategoriesRepo>()));
   sl.registerFactory<ProductDetailsController>(() => ProductDetailsController(sl<ProductsRepo>(), sl<CartRepo>()));
