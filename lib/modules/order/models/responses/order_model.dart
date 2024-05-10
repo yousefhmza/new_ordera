@@ -1,32 +1,36 @@
 import 'package:ecommerce/core/utils/json_utils.dart';
+import 'package:ecommerce/modules/regions/models/region_model.dart';
 
 class OrderModel {
-  final dynamic id;
-  final dynamic name;
-  final dynamic email;
-  final dynamic userId;
-  final dynamic phone;
-  final dynamic country;
-  final dynamic address;
-  final dynamic city;
-  final dynamic state;
-  final dynamic zipcode;
-  final dynamic message;
-  final dynamic coupon;
+  final int id;
+  final String name;
+  final String email;
+  final int userId;
+  final String phone;
+  final int countryId;
+  final String address;
+  final int cityId;
+  final int stateId;
+  final String zipcode;
+  final String message;
+  final String coupon;
   final dynamic couponDiscounted;
-  final dynamic totalAmount;
-  final dynamic status;
-  final dynamic paymentStatus;
-  final dynamic paymentGateway;
-  final dynamic paymentTrack;
-  final dynamic transactionId;
-  final dynamic paymentMeta;
-  final dynamic shippingAddressId;
+  final num totalAmount;
+  final String status;
+  final String paymentStatus;
+  final String paymentGateway;
+  final String paymentTrack;
+  final int transactionId;
+  final String paymentMeta;
+  final int shippingAddressId;
   final dynamic selectedShippingOption;
   final dynamic checkoutType;
-  final dynamic checkoutImagePath;
+  final String checkoutImagePath;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final Region country;
+  final Region state;
+  final Region city;
 
   OrderModel({
     required this.id,
@@ -34,10 +38,10 @@ class OrderModel {
     required this.email,
     required this.userId,
     required this.phone,
-    required this.country,
+    required this.countryId,
     required this.address,
-    required this.city,
-    required this.state,
+    required this.cityId,
+    required this.stateId,
     required this.zipcode,
     required this.message,
     required this.coupon,
@@ -55,33 +59,39 @@ class OrderModel {
     required this.checkoutImagePath,
     required this.createdAt,
     required this.updatedAt,
+    required this.country,
+    required this.state,
+    required this.city,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
-        id: json["id"],
-        name: json["name"],
-        email: json["email"],
-        userId: json["user_id"],
-        phone: json["phone"],
-        country: json["country"],
-        address: json["address"],
-        city: json["city"],
-        state: json["state"],
-        zipcode: json["zipcode"],
-        message: json["message"],
-        coupon: json["coupon"],
+        id: JsonUtils.parseIntFromJson(json["id"]),
+        name: JsonUtils.parseStringFromJson(json["name"]),
+        email: JsonUtils.parseStringFromJson(json["email"]),
+        userId: JsonUtils.parseIntFromJson(json["user_id"]),
+        phone: JsonUtils.parseStringFromJson(json["phone"]),
+        countryId: JsonUtils.parseIntFromJson(json["country"]),
+        address: JsonUtils.parseStringFromJson(json["address"]),
+        cityId: JsonUtils.parseIntFromJson(json["city"]),
+        stateId: JsonUtils.parseIntFromJson(json["state"]),
+        zipcode: JsonUtils.parseStringFromJson(json["zipcode"]),
+        message: JsonUtils.parseStringFromJson(json["message"]),
+        coupon: JsonUtils.parseStringFromJson(json["coupon"]),
         couponDiscounted: json["coupon_discounted"],
-        totalAmount: json["total_amount"],
-        status: json["status"],
-        paymentStatus: json["payment_status"],
-        paymentGateway: json["payment_gateway"],
-        paymentTrack: json["payment_track"],
-        transactionId: json["transaction_id"],
-        paymentMeta: json["payment_meta"],
-        shippingAddressId: json["shipping_address_id"],
+        totalAmount: JsonUtils.parseNumFromJson(json["total_amount"]),
+        status: JsonUtils.parseStringFromJson(json["status"]),
+        paymentStatus: JsonUtils.parseStringFromJson(json["payment_status"]),
+        paymentGateway: JsonUtils.parseStringFromJson(json["payment_gateway"]),
+        paymentTrack: JsonUtils.parseStringFromJson(json["payment_track"]),
+        transactionId: JsonUtils.parseIntFromJson(json["transaction_id"]),
+        paymentMeta: JsonUtils.parseStringFromJson(json["payment_meta"]),
+        shippingAddressId: JsonUtils.parseIntFromJson(json["shipping_address_id"]),
         selectedShippingOption: json["selected_shipping_option"],
         checkoutType: json["checkout_type"],
         checkoutImagePath: json["checkout_image_path"],
+        country: Region.fromJson(json["get_country"]),
+        state: Region.fromJson(json["get_state"]),
+        city: Region.fromJson(json["get_city"]),
         createdAt: JsonUtils.parseDatetimeFromJson(json["created_at"]),
         updatedAt: JsonUtils.parseDatetimeFromJson(json["updated_at"]),
       );

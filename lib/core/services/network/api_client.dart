@@ -10,6 +10,8 @@ import '../local/storage_keys.dart';
 const String appDomain = "http://hexfashion.xyz";
 const String mediaPath = "$appDomain/assets/tenant/uploads/media-uploader/hexfashion";
 const String _baseURL = "$appDomain/api/tenant/v1";
+const String _xApiKey = "x-api-key";
+const String _xApiKeyValue = "b8f4a0ba4537ad6c3ee41ec0a43549d1";
 const String _contentType = "Content-Type";
 const String _accept = "accept";
 const String _applicationJson = "application/json";
@@ -31,6 +33,7 @@ class ApiClient {
       headers: {
         _contentType: _applicationJson,
         _accept: _applicationJson,
+        _xApiKey: _xApiKeyValue,
         _acceptLanguage: _cacheClient.get(StorageKeys.appLocale) ?? Platform.localeName.substring(0, 2),
       },
     );

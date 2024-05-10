@@ -22,7 +22,9 @@ import 'package:ecommerce/modules/legal/controllers/terms_and_conditions_control
 import 'package:ecommerce/modules/legal/repo/legal_repo.dart';
 import 'package:ecommerce/modules/on_boarding/controller/on_boarding_controller.dart';
 import 'package:ecommerce/modules/on_boarding/repositories/on_boarding_repo.dart';
+import 'package:ecommerce/modules/order/controller/my_orders_controller.dart';
 import 'package:ecommerce/modules/order/controller/order_controller.dart';
+import 'package:ecommerce/modules/order/repos/orders_repo.dart';
 import 'package:ecommerce/modules/payment/controller/add_card_controller.dart';
 import 'package:ecommerce/modules/payment/controller/add_payment_method_controller.dart';
 import 'package:ecommerce/modules/payment/controller/payment_methods_controller.dart';
@@ -71,6 +73,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ProductsRepo>(() => ProductsRepo(sl<ApiClient>(), sl<NetworkInfo>()));
   sl.registerLazySingleton<CartRepo>(() => CartRepo(sl<CartDatabase>()));
   sl.registerLazySingleton<AddressesRepo>(() => AddressesRepo(sl<ApiClient>(), sl<NetworkInfo>()));
+  sl.registerLazySingleton<OrdersRepo>(() => OrdersRepo(sl<ApiClient>(), sl<NetworkInfo>()));
 
   // Controllers
   sl.registerFactory<L10nController>(() => L10nController(sl<CacheClient>()));
@@ -93,6 +96,7 @@ Future<void> init() async {
   sl.registerFactory<ProductDetailsController>(() => ProductDetailsController(sl<ProductsRepo>(), sl<CartRepo>()));
   sl.registerFactory<CartController>(() => CartController(sl<CartRepo>()));
   sl.registerFactory<CategoriesController>(() => CategoriesController(sl<CategoriesRepo>()));
-  sl.registerFactory<OrderController>(() => OrderController());
+  sl.registerFactory<OrderController>(() => OrderController(sl<OrdersRepo>()));
+  sl.registerFactory<MyOrdersController>(() => MyOrdersController(sl<OrdersRepo>()));
   sl.registerFactory<TermsAndConditionsController>(() => TermsAndConditionsController(sl<LegalRepo>()));
 }

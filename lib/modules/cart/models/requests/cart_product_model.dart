@@ -2,6 +2,8 @@
 
 import 'dart:convert';
 
+import 'package:crypto/crypto.dart';
+
 import '../../../../core/services/local/storage_keys.dart';
 
 class CartProduct {
@@ -114,6 +116,35 @@ class CartProduct {
       StorageKeys.variantId: variantId,
       StorageKeys.attributesHash: attributesHash ?? "",
       StorageKeys.taxOptionsSumRate: taxOSR,
+    };
+  }
+
+  Map<String, Map<String, dynamic>> toOrderJson() {
+    final String rowId = md5.convert(utf8.encode(productId.toString() + attributes.toString())).toString();
+    return {
+      rowId: {
+        "rowId": rowId,
+        "id": productId,
+        "name": title,
+        "qty": qty,
+        "price": priceWithAttr ?? discountPrice,
+        "options": {
+          "variant_id": variantId,
+          if (attributes?["Color"] != null) "color_name": attributes!["Color"],
+          if (attributes?["color_code"] != null) "color_code": attributes!["color_code"],
+          if (attributes?["Size"] != null) "size_name": attributes!["Size"],
+          "attributes": jsonEncode(attributes ?? {}),
+          "image": thumbnail,
+          "used_categories": {
+            if (category != null) "category": category,
+            if (subcategory != null) "subcategory": subcategory,
+            if (childCategory != null) "childcategory": childCategory,
+          }
+        },
+        "discount": 0,
+        "tax": 0,
+        "subtotal": (priceWithAttr ?? discountPrice ?? 1) * (qty ?? 12)
+      }
     };
   }
 }

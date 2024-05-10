@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import 'package:ecommerce/modules/addresses/models/responses/address_model.dart';
 import '../../../core/utils/alerts.dart';
+import '../../order/models/responses/shipping_cost_model.dart';
 import '../repos/addresses_repo.dart';
 
 class AddressesController extends GetxController {
@@ -11,7 +12,9 @@ class AddressesController extends GetxController {
 
   late final bool fromCheckoutScreen;
   RxBool isLoading = false.obs;
+  RxBool isFetchingShippingCost = false.obs;
   RxList<Address> addresses = RxList([]);
+  Rx<ShippingCostModel?> shippingCost = Rx(null);
   RxInt deletingAddressNumber = 0.obs;
 
   @override

@@ -2,11 +2,11 @@ import 'package:ecommerce/core/resources/app_values.dart';
 import 'package:ecommerce/core/utils/globals.dart';
 import 'package:ecommerce/core/view/views.dart';
 import 'package:ecommerce/modules/categories/controller/categories_controller.dart';
-import 'package:ecommerce/modules/categories/view/components/categories_appbar.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/resources/resources.dart';
 import '../../../product/models/responses/in_list_product_model.dart';
 
 class CategoriesScreen extends GetWidget<CategoriesController> {
@@ -16,7 +16,7 @@ class CategoriesScreen extends GetWidget<CategoriesController> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CategoriesAppbar(),
+        MainAppbar(showDefaultBackButton: false, title: AppStrings.lblCategories.tr),
         const VerticalSpace(AppSize.s16),
         Obx(
           () {

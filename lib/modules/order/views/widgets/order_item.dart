@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 import '../../models/responses/order_model.dart';
 
 class OrderItem extends StatelessWidget {
-  // final OrderModel order;
+  final OrderModel order;
 
-  const OrderItem({super.key});
+  const OrderItem(this.order, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class OrderItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomText(
-                "${AppStrings.lblOrderNo.tr} ${"order.id"}",
+                "${AppStrings.lblOrderNo.tr} ${order.id}",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(),
               ),
               CustomText(
-                "${AppStrings.lblOnDelivery.tr} ${"DateFormat.yMEd().format(order.createdAt)"}",
+                "${AppStrings.lblOnDelivery.tr} ${DateFormat.yMEd().format(order.createdAt)}",
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(),
               ),
             ],
@@ -38,8 +38,8 @@ class OrderItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s8),
           ),
           child: CustomText(
-            "order.status.text",
-            // style: Theme.of(context).textTheme.titleSmall?.copyWith(color: order.status.color),
+            order.status.toString(),
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         )
       ],

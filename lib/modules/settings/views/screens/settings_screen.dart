@@ -61,6 +61,10 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () => Get.toNamed(Routes.accountScreen),
                 ),
                 OptionItem(
+                  text: AppStrings.lblMyOrders.tr,
+                  onTap: () => Get.toNamed(Routes.myOrdersScreen),
+                ),
+                OptionItem(
                   text: AppStrings.lblAddresses.tr,
                   onTap: () => Get.toNamed(Routes.addressesScreen, arguments: {"from_checkout_screen": false}),
                 ),

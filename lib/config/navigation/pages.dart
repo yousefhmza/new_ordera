@@ -6,6 +6,7 @@ import 'package:ecommerce/modules/legal/binding/terms_and_conditions_binding.dar
 import 'package:ecommerce/modules/legal/views/screens/terms_and_condition_screen.dart';
 import 'package:ecommerce/modules/on_boarding/binding/on_boarding_binding.dart';
 import 'package:ecommerce/modules/on_boarding/view/screens/on_boarding_screen.dart';
+import 'package:ecommerce/modules/order/binding/my_orders_binding.dart';
 import 'package:ecommerce/modules/order/binding/order_binding.dart';
 import 'package:ecommerce/modules/order/views/screens/order_screen.dart';
 import 'package:ecommerce/modules/order/views/screens/successful_order_screen.dart';
@@ -139,6 +140,7 @@ class Pages {
     ),
     GetPage(
       name: Routes.myOrdersScreen,
+      binding: MyOrdersBinding(),
       page: () => MyOrdersScreen(),
       transition: Transition.cupertino,
     ),

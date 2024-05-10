@@ -23,6 +23,13 @@ class SearchScreen extends StatelessWidget {
             hintText: AppStrings.lblSearchHere.tr,
           ),
         ),
+        actions: [
+          CustomImage(
+            image: AppImages.imgIconFilterAltLight,
+            width: AppSize.s24,
+            height: AppSize.s24,
+          )
+        ],
       ),
       // body: Obx(
       //   () => controller.isLoading.value

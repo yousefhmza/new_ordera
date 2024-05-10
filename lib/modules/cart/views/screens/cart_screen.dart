@@ -43,7 +43,7 @@ class CartScreen extends GetWidget<CartController> {
               slivers: [
                 const VerticalSpace.sliver(AppSize.s16),
                 Obx(
-                      () => SliverList.separated(
+                  () => SliverList.separated(
                     key: UniqueKey(),
                     separatorBuilder: (context, index) => SizedBox(height: AppSize.s10.v),
                     itemCount: controller.cartProductsList.length,
@@ -60,7 +60,7 @@ class CartScreen extends GetWidget<CartController> {
                         children: [
                           Text("lbl_total_products".tr, style: CustomTextStyles.labelLargeBlack900),
                           Obx(
-                                () => Text(
+                            () => Text(
                               "${AppStrings.usd.tr} ${controller.totalPrice.value.toStringAsFixed(2)}",
                               style: Get.theme.textTheme.titleMedium,
                             ),
@@ -68,39 +68,39 @@ class CartScreen extends GetWidget<CartController> {
                         ],
                       ),
                       Obx(
-                            () => controller.cartProductsList.isEmpty
+                        () => controller.cartProductsList.isEmpty
                             ? const SizedBox.shrink()
                             : CustomButton(
-                          margin: EdgeInsets.only(top: 23.v),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CustomText(
-                                "lbl_continuer_order".tr,
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontWeight: FontWeightManager.bold,
-                                  fontSize: FontSize.s14,
+                                margin: EdgeInsets.only(top: 23.v),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      "lbl_continuer_order".tr,
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontWeight: FontWeightManager.bold,
+                                        fontSize: FontSize.s14,
+                                      ),
+                                    ),
+                                    CustomImage(
+                                        image: AppImages.imgArrowright, height: 25.adaptSize, width: 25.adaptSize)
+                                  ],
                                 ),
+                                onPressed: () async {
+                                  final orderedSuccessfully = await Get.toNamed(
+                                    Routes.orderScreen,
+                                    arguments: {
+                                      "products": controller.cartProductsList,
+                                      "subtotal": controller.totalPrice.value
+                                    },
+                                  );
+                                  if (orderedSuccessfully != null && orderedSuccessfully) {
+                                    await controller.clearCart();
+                                    Get.toNamed(Routes.successfulOrderScreen);
+                                  }
+                                },
                               ),
-                              CustomImage(
-                                  image: AppImages.imgArrowright, height: 25.adaptSize, width: 25.adaptSize)
-                            ],
-                          ),
-                          onPressed: () async {
-                            final orderedSuccessfully = await Get.toNamed(
-                              Routes.orderScreen,
-                              arguments: {
-                                "products": controller.cartProductsList,
-                                "subtotal": controller.totalPrice.value
-                              },
-                            );
-                            if (orderedSuccessfully != null && orderedSuccessfully) {
-                              await controller.clearCart();
-                              Get.toNamed(Routes.successfulOrderScreen);
-                            }
-                          },
-                        ),
                       ),
                       SizedBox(height: 23.v),
                     ],
