@@ -25,7 +25,7 @@ class OrderModel {
   final int shippingAddressId;
   final dynamic selectedShippingOption;
   final dynamic checkoutType;
-  final String checkoutImagePath;
+  final dynamic checkoutImagePath;
   final DateTime createdAt;
   final DateTime updatedAt;
   final Region country;
@@ -89,9 +89,9 @@ class OrderModel {
         selectedShippingOption: json["selected_shipping_option"],
         checkoutType: json["checkout_type"],
         checkoutImagePath: json["checkout_image_path"],
-        country: Region.fromJson(json["get_country"]),
-        state: Region.fromJson(json["get_state"]),
-        city: Region.fromJson(json["get_city"]),
+        country: Region.fromJson(json["get_country"] ?? {}),
+        state: Region.fromJson(json["get_state"] ?? {}),
+        city: Region.fromJson(json["get_city"] ?? {}),
         createdAt: JsonUtils.parseDatetimeFromJson(json["created_at"]),
         updatedAt: JsonUtils.parseDatetimeFromJson(json["updated_at"]),
       );
